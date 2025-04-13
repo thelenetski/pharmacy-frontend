@@ -1,0 +1,73 @@
+.modalWrapper {
+  position: relative;
+  padding: 48px 16px;
+  border-radius: 15px;
+  background-color: $_main_color8;
+  width: 100%;
+  max-width: 375px;
+  height: fit-content;
+  margin: 0 16px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(47, 47, 47, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  position: relative;
+  border-radius: 15px;
+  width: 100%;
+  margin: auto;
+}
+
+.btnClose {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: 0.3s;
+}
+
+.btnClose:hover {
+  transform: scale(1.1);
+}
+
+.btnClose svg {
+  width: 24px;
+  height: 24px;
+  stroke: #2f2f2f;
+}
+
+@media screen and (max-width: 374px) {
+  .modalWrapper {
+    width: calc(100% - 32px);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .modalWrapper {
+    padding: 48px 64px;
+    width: fit-content;
+    max-width: 628px;
+  }
+  .btnClose {
+    top: 20px;
+    right: 20px;
+  }
+  .btnClose svg {
+    width: 32px;
+    height: 32px;
+  }
+}
