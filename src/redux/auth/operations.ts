@@ -1,9 +1,40 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { RootState } from '../store';
+
+export interface User {
+  email: string;
+  password: string;
+  role: 'admin' | 'user';
+  name: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  email: string;
+}
+
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  loading: boolean;
+  isRefreshing: boolean;
+  isSignedIn: boolean;
+}
+
+export interface Credentials {
+  email: string;
+  password: string;
+}
+
+export interface AuthError {
+  message: string;
+  statusCode?: number;
+}
 
 axios.defaults.baseURL = 'https://vocab-builder-backend.p.goit.global/api';
 
-const setAuthHeader = token => {
+const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -11,45 +42,17 @@ const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const signUp = createAsyncThunk(
-  'auth/signup',
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await axios.post('users/signup', credentials);
-      setAuthHeader(res.data.token);
-      return res.data;
-    } catch (error) {
-      if (error.response) {
-        console.log(error.response);
-        return thunkAPI.rejectWithValue(error.response.data);
-      }
-      return thunkAPI.rejectWithValue(error.message || 'Unknown error');
-    }
-  }
-);
-
-export const signIn = createAsyncThunk(
-  'auth/login',
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await axios.post('users/signin', credentials);
-      // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
-      return res.data;
-    } catch (error) {
-      if (error.response) {
-        return thunkAPI.rejectWithValue(error.response.data);
-      }
-      return thunkAPI.rejectWithValue(error.message || 'Unknown error');
-    }
-  }
-);
-
-export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
+export const signIn = createAsyncThunk<
+  AuthResponse,
+  Credentials,
+  { rejectValue: AuthError }
+>('auth/login', async (credentials, thunkAPI) => {
   try {
-    await axios.post('users/signout');
-    clearAuthHeader();
-  } catch (error) {
+    const res = await axios.post<AuthResponse>('users/signin', credentials);
+
+    setAuthHeader(res.data.accessToken);
+    return res.data;
+  } catch (error: any) {
     if (error.response) {
       return thunkAPI.rejectWithValue(error.response.data);
     }
@@ -57,7 +60,26 @@ export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-export const refreshUser = createAsyncThunk(
+export const logOut = createAsyncThunk<void, void, { rejectValue: string }>(
+  'auth/logout',
+  async (_, thunkAPI) => {
+    try {
+      await axios.post('users/signout');
+      clearAuthHeader();
+    } catch (error: any) {
+      if (error.response) {
+        return thunkAPI.rejectWithValue(error.response.data);
+      }
+      return thunkAPI.rejectWithValue(error.message || 'Unknown error');
+    }
+  }
+);
+
+export const refreshUser = createAsyncThunk<
+  User,
+  void,
+  { state: RootState; rejectValue: string } // Доступ к стейту и тип ошибки
+>(
   'auth/refresh',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
@@ -71,7 +93,7 @@ export const refreshUser = createAsyncThunk(
       setAuthHeader(persistedToken);
       const res = await axios.get('users/current');
       return res.data;
-    } catch (error) {
+    } catch (error: any) {
       if (error.response) {
         return thunkAPI.rejectWithValue(error.response.data);
       }
@@ -80,7 +102,7 @@ export const refreshUser = createAsyncThunk(
   },
   {
     condition: (_, thunkAPI) => {
-      const state = thunkAPI.getState();
+      const state = thunkAPI.getState() as RootState;
       const token = state.auth.token;
 
       if (token) return true;

@@ -1,7 +1,7 @@
 import style from './SignInPage.module.scss';
 import pill from '../../assets/images/pill.png';
 import pill2x from '../../assets/images/pill@2x.png';
-import LoginForm from '../../components/LoginForm/LoginForm';
+import LoginForm from '../../components/LogInForm/LoginForm';
 
 const SignInPage = () => {
   return (
