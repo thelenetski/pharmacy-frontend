@@ -1,5 +1,5 @@
 @use 'sass:math';
-@use './breakpoints';
+@use './breakpoints' as *;
 /*
 screen types: 
     mobile,

@@ -1,0 +1,25 @@
+.signInPage {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 92px;
+}
+
+.signInPage h1 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: 0;
+}
+
+.signInPage span {
+  color: $main-color;
+}
+
+.pill {
+  display: inline-block;
+  margin-left: -5px;
+  margin-bottom: -10px;
+  width: 95px;
+  height: 93px;
+}

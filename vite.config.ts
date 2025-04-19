@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
+import path from 'path';
 
 export default defineConfig(({ command }) => {
   return {
@@ -27,5 +28,21 @@ export default defineConfig(({ command }) => {
         },
       }),
     ],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `
+            @use "@/scss/common/vars" as *;
+            @use "@/scss/common/mixins" as *;
+            @use "@/scss/common/reset";
+          `,
+        },
+      },
+    },
   };
 });

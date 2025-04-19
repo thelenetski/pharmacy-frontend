@@ -19,9 +19,11 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    isOpen
-      ? document.body.classList.add('no-scroll')
-      : document.body.classList.remove('no-scroll');
+    if (isOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
   }, [isOpen]);
 
   const modalRoot = document.getElementById('modal-root') as HTMLElement | null;
