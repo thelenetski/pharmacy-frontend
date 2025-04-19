@@ -7,10 +7,6 @@ export default defineConfig(({ command }) => {
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
-    build: {
-      sourcemap: true,
-      outDir: '../dist',
-    },
     plugins: [
       ViteImageOptimizer({
         exclude: /^sprite.svg$/,
