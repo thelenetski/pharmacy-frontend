@@ -30,11 +30,9 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
       <Header type={headerType} />
       <main className={style.main}>
         <Suspense fallback={<Loader />}>{children}</Suspense>
-        <ModalWindow>
+        {/* <ModalWindow>
           {type === modalTypes.addProduct && <AddProductForm />}
-          {/* {type === modalTypes.editWord && <EditWordForm />}
-        {type === modalTypes.welldone && <ModalWellDone />} */}
-        </ModalWindow>
+        </ModalWindow> */}
       </main>
     </div>
   );
