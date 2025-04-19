@@ -1,12 +1,12 @@
-import { lazy, useEffect } from 'react';
+import { lazy } from 'react';
 import './App.scss';
 import { selectIsRefreshing } from './redux/auth/selectors.ts';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Loader from './components/Loader/Loader.tsx';
 import { Route, Routes } from 'react-router-dom';
 import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute.tsx';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute.tsx';
-import { refreshUser } from './redux/auth/operations.ts';
+// import PrivateRoute from './components/PrivateRoute/PrivateRoute.tsx';
+// import { refreshUser } from './redux/auth/operations.ts';
 import SharedLayout from './components/SharedLayout/SharedLayout.tsx';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.tsx'));
@@ -26,7 +26,7 @@ const NotFoundPage = lazy(
 
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   const init = async () => {
