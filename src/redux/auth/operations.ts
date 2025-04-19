@@ -18,7 +18,7 @@ export interface AuthState {
   user: User | null;
   token: string | null;
   loading: boolean;
-  isRefreshing: boolean;
+  isRefreshing?: boolean;
   isSignedIn: boolean;
 }
 
@@ -76,9 +76,9 @@ export const logOut = createAsyncThunk<void, void, { rejectValue: string }>(
 );
 
 export const refreshUser = createAsyncThunk<
-  User,
+  AuthResponse,
   void,
-  { state: RootState; rejectValue: string } // Доступ к стейту и тип ошибки
+  { state: RootState; rejectValue: string }
 >(
   'auth/refresh',
   async (_, thunkAPI) => {
