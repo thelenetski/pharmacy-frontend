@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import css from './LoginForm.module.scss';
+import css from './SignInForm.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -19,7 +19,7 @@ const schema = yup
 // Типы данных
 type LoginFormInputs = yup.InferType<typeof schema>;
 
-const LoginForm = () => {
+const SignInForm = () => {
   const {
     register,
     handleSubmit,
@@ -66,4 +66,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignInForm;

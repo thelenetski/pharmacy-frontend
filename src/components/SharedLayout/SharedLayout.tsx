@@ -1,10 +1,8 @@
 import { ReactNode, Suspense, useEffect, useState } from 'react';
 import style from './SharedLayout.module.scss';
 import Loader from '../Loader/Loader';
-import ModalWindow from '../ModalWindow/ModalWindow';
 import { useSelector } from 'react-redux';
 import { selectTypeModal } from '../../redux/modal/selectors';
-import { modalTypes } from '../../redux/modal/slice';
 import Header from '../Header/Header';
 import { useLocation } from 'react-router-dom';
 

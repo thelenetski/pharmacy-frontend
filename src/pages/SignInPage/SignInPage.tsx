@@ -1,7 +1,7 @@
 import style from './SignInPage.module.scss';
 import pill from '../../assets/images/pill.png';
 import pill2x from '../../assets/images/pill@2x.png';
-import LoginForm from '../../components/LogInForm/LoginForm';
+import SignInForm from '../../components/SignInForm/SignInForm';
 
 const SignInPage = () => {
   return (
@@ -18,7 +18,7 @@ const SignInPage = () => {
         delivered Say goodbye to all <span>your healthcare</span> worries with
         us
       </h1>
-      <LoginForm />
+      <SignInForm />
     </div>
   );
 };
