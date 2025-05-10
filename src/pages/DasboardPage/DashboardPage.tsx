@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { getDash } from '../../redux/dashboard/operations';
 import 'react-loading-skeleton/dist/skeleton.css';
 import Statistics from '../../components/Statistics/Statistics';
-import clsx from 'clsx';
 import RecentCustomers from '../../components/RecentCustomers/RecentCustomers';
 import IncomeExpenses from '../../components/IncomeExpenses/IncomeExpenses';
 
@@ -17,7 +16,7 @@ function DashboardPage() {
   }, [dispatch]);
 
   return (
-    <div className={clsx(css.dashWrap, 'container')}>
+    <div className={css.dashWrap}>
       <Statistics />
       <RecentCustomers />
       <IncomeExpenses />

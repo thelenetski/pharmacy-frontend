@@ -22,6 +22,7 @@
   color: $main-dark-color;
 }
 .tableWrap .tableUser {
+  max-width: 84px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -56,4 +57,7 @@
 }
 .tableWrap tr:last-child td {
   border-bottom: none;
+}
+.tableWrap .email {
+  word-break: break-all;
 }

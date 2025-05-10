@@ -50,7 +50,7 @@ function RecentCustomers() {
     }),
     columnHelper.accessor('email', {
       cell: info => {
-        return <div className={css.cellPadding}>{info.getValue()}</div>;
+        return <div className={css.email}>{info.getValue()}</div>;
       },
       header: () => {
         return <span>Email</span>;
