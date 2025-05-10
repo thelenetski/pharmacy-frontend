@@ -36,3 +36,8 @@
   color: $main-color8;
   background-color: $main-color;
 }
+.loginButton:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  background-color: $main-dark-color;
+}

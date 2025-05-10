@@ -12,8 +12,7 @@ export interface AuthState {
 }
 
 interface AuthPayload {
-  accessToken: string;
-  email: string;
+  data: { accessToken: string; email: string };
 }
 
 const handleRejected = (state: AuthState) => {
@@ -45,8 +44,8 @@ const authSlice = createSlice({
       .addCase(
         signIn.fulfilled,
         (state, action: PayloadAction<AuthPayload>) => {
-          state.token = action.payload.accessToken;
-          state.user = action.payload.email;
+          state.token = action.payload.data.accessToken;
+          state.user = action.payload.data.email;
           state.isSignedIn = true;
           state.loading.signIn = false;
         }
@@ -62,8 +61,8 @@ const authSlice = createSlice({
       .addCase(
         refreshUser.fulfilled,
         (state, action: PayloadAction<AuthPayload>) => {
-          state.token = action.payload.accessToken;
-          state.user = action.payload.email;
+          state.token = action.payload.data.accessToken;
+          state.user = action.payload.data.email;
           state.isSignedIn = true;
           state.isRefreshing = false;
         }

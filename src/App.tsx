@@ -1,44 +1,39 @@
-import { lazy } from 'react';
+import { lazy, useEffect } from 'react';
 import './App.scss';
 import { selectIsRefreshing } from './redux/auth/selectors.ts';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from './components/Loader/Loader.tsx';
 import { Route, Routes } from 'react-router-dom';
 import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute.tsx';
-// import PrivateRoute from './components/PrivateRoute/PrivateRoute.tsx';
-// import { refreshUser } from './redux/auth/operations.ts';
+import { refreshUser } from './redux/auth/operations.ts';
 import SharedLayout from './components/SharedLayout/SharedLayout.tsx';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute.tsx';
+import { AppDispatch } from './redux/store.ts';
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage.tsx'));
 const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.tsx'));
-// const DictionaryPage = lazy(() =>
-//   import('./pages/DictionaryPage/DictionaryPage.jsx')
-// );
-// const RecommendPage = lazy(() =>
-//   import('./pages/RecommendPage/RecommendPage.jsx')
-// );
-// const TrainingPage = lazy(() =>
-//   import('./pages/TrainingPage/TrainingPage.jsx')
-// );
+const DashboardPage = lazy(
+  () => import('./pages/DasboardPage/DashboardPage.tsx')
+);
 const NotFoundPage = lazy(
   () => import('./pages/NotFoundPage/NotFoundPage.tsx')
 );
 
 function App() {
   const isRefreshing = useSelector(selectIsRefreshing);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
-  // useEffect(() => {
-  //   const init = async () => {
-  //     try {
-  //       await dispatch(refreshUser());
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  //   };
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await dispatch(refreshUser());
+      } catch (e) {
+        console.log(e);
+      }
+    };
 
-  //   init();
-  // }, [dispatch]);
+    init();
+  }, [dispatch]);
 
   return isRefreshing ? (
     <Loader />
@@ -53,6 +48,12 @@ function App() {
               component={<SignInPage />}
               redirectTo="/dashboard"
             />
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute component={<DashboardPage />} redirectTo="/login" />
           }
         />
         {/* <Route

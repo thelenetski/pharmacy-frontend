@@ -5,6 +5,7 @@ import Loader from '../Loader/Loader';
 // import { selectTypeModal } from '../../redux/modal/selectors';
 import Header from '../Header/Header';
 import { useLocation } from 'react-router-dom';
+import clsx from 'clsx';
 
 interface SharedLayoutProps {
   children: ReactNode;
@@ -24,7 +25,12 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
   }, [location]);
 
   return (
-    <div className={style.wrapper}>
+    <div
+      className={clsx(
+        location.pathname === '/login' && 'wrapperBG',
+        style.wrapper
+      )}
+    >
       <Header type={headerType} />
       <main className={style.main}>
         <Suspense fallback={<Loader />}>{children}</Suspense>

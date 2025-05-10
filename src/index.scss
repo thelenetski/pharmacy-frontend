@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-:root {
+#root {
   min-width: 320px;
   max-width: 375px;
+  min-height: 100vh;
+  display: flex;
   margin: 0 auto;
 
   font-family: Inter, Arial, sans-serif;
@@ -11,14 +13,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-image: image-set(
-    url('/src/assets/images/bg-elem.png') 1x,
-    url('/src/assets/images/bg-elem@2x.png') 2x
-  );
-  background-repeat: no-repeat;
-  background-position: -100% 145%;
-
-  @include media(tablet) {
+  @include media('tablet') {
     max-width: 768px;
   }
 }
@@ -26,5 +21,8 @@
 body {
   margin: 0;
   display: flex;
-  min-height: 100vh;
+  background-color: $main-color6;
+}
+.container {
+  padding: 0 20px;
 }

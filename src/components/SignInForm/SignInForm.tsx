@@ -2,10 +2,14 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import css from './SignInForm.module.scss';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useDispatch, useSelector } from 'react-redux';
+import { signIn } from '../../redux/auth/operations';
+import { AppDispatch } from '../../redux/store';
+import { selectAuthLoading } from '../../redux/auth/selectors';
 
 const schema = yup
   .object({
-    username: yup
+    email: yup
       .string()
       .email('Must be a valid email')
       .required('Email is required'),
@@ -16,7 +20,6 @@ const schema = yup
   })
   .required();
 
-// Типы данных
 type LoginFormInputs = yup.InferType<typeof schema>;
 
 const SignInForm = () => {
@@ -27,9 +30,11 @@ const SignInForm = () => {
   } = useForm<LoginFormInputs>({
     resolver: yupResolver(schema),
   });
+  const dispatch = useDispatch<AppDispatch>();
+  const loading = useSelector(selectAuthLoading);
 
   const onSubmit: SubmitHandler<LoginFormInputs> = data => {
-    console.log('Login Data:', data);
+    dispatch(signIn(data));
   };
 
   return (
@@ -39,11 +44,11 @@ const SignInForm = () => {
           <input
             type="text"
             placeholder="Email address"
-            {...register('username', { required: 'Username is required' })}
+            {...register('email', { required: 'Email is required' })}
             className={css.loginInput}
           />
-          {errors.username && (
-            <p className={css.loginInputError}>{errors.username.message}</p>
+          {errors.email && (
+            <p className={css.loginInputError}>{errors.email.message}</p>
           )}
         </div>
 
@@ -59,8 +64,12 @@ const SignInForm = () => {
           )}
         </div>
       </div>
-      <button type="submit" className={css.loginButton}>
-        Log In
+      <button
+        type="submit"
+        className={css.loginButton}
+        disabled={loading.signIn}
+      >
+        {loading.signIn ? 'Loading...' : 'Log In'}
       </button>
     </form>
   );

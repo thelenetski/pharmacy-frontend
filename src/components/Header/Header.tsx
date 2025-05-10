@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Logo from '../Logo/Logo';
 import css from './Headere.module.scss';
 
@@ -7,11 +8,13 @@ interface Props {
 
 const Header: React.FC<Props> = ({ type }) => {
   return (
-    <header>
-      <div className={css.logoWrap}>
-        <Logo />
+    <header className={clsx(type === 'full' && css.headerWrap)}>
+      <div className={clsx(css.logoWrap, 'container')}>
+        <Logo type={type} />
         <div className={css.titleBox}>
           {type === 'simple' && <p>E-Pharmacy</p>}
+          {type === 'full' && <p>Medicine store</p>}
+          {type === 'full' && <span>Dasboard | vendor@gmail.com</span>}
         </div>
       </div>
     </header>

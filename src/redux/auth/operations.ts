@@ -10,8 +10,7 @@ export interface User {
 }
 
 export interface AuthResponse {
-  accessToken: string;
-  email: string;
+  data: { accessToken: string; email: string };
 }
 
 export interface AuthState {
@@ -32,7 +31,7 @@ export interface AuthError {
   statusCode?: number;
 }
 
-axios.defaults.baseURL = 'https://vocab-builder-backend.p.goit.global/api';
+axios.defaults.baseURL = 'https://pharmacy-backend-jmat.onrender.com/api';
 
 const setAuthHeader = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -48,9 +47,11 @@ export const signIn = createAsyncThunk<
   { rejectValue: AuthError }
 >('auth/login', async (credentials, thunkAPI) => {
   try {
-    const res = await axios.post<AuthResponse>('users/signin', credentials);
+    const res = await axios.post<AuthResponse>('user/login', credentials, {
+      withCredentials: true,
+    });
 
-    setAuthHeader(res.data.accessToken);
+    setAuthHeader(res.data.data.accessToken);
     return res.data;
   } catch (error: any) {
     if (error.response) {
@@ -64,7 +65,7 @@ export const logOut = createAsyncThunk<void, void, { rejectValue: string }>(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      await axios.post('users/signout');
+      await axios.post('user/signout');
       clearAuthHeader();
     } catch (error: any) {
       if (error.response) {
@@ -91,7 +92,11 @@ export const refreshUser = createAsyncThunk<
 
     try {
       setAuthHeader(persistedToken);
-      const res = await axios.get('users/current');
+      const res = await axios.post(
+        'user/refresh',
+        {},
+        { withCredentials: true }
+      );
       return res.data;
     } catch (error: any) {
       if (error.response) {
