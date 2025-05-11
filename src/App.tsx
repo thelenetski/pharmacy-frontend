@@ -15,6 +15,9 @@ const SignInPage = lazy(() => import('./pages/SignInPage/SignInPage.tsx'));
 const DashboardPage = lazy(
   () => import('./pages/DasboardPage/DashboardPage.tsx')
 );
+const AllOrdersPage = lazy(
+  () => import('./pages/AllOrdersPage/AllOrdersPage.tsx')
+);
 const NotFoundPage = lazy(
   () => import('./pages/NotFoundPage/NotFoundPage.tsx')
 );
@@ -56,33 +59,12 @@ function App() {
             <PrivateRoute component={<DashboardPage />} redirectTo="/login" />
           }
         />
-        {/* <Route
-              path="/dictionary"
-              element={
-                <PrivateRoute
-                  component={<DictionaryPage />}
-                  redirectTo="/login"
-                />
-              }
-            />
-            <Route
-              path="/recommended"
-              element={
-                <PrivateRoute
-                  component={<RecommendPage />}
-                  redirectTo="/login"
-                />
-              }
-            />
-            <Route
-              path="/training"
-              element={
-                <PrivateRoute
-                  component={<TrainingPage />}
-                  redirectTo="/login"
-                />
-              }
-            /> */}
+        <Route
+          path="/orders"
+          element={
+            <PrivateRoute component={<AllOrdersPage />} redirectTo="/login" />
+          }
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </SharedLayout>

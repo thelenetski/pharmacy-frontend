@@ -65,7 +65,7 @@ export const logOut = createAsyncThunk<void, void, { rejectValue: string }>(
   'auth/logout',
   async (_, thunkAPI) => {
     try {
-      await axios.post('user/signout');
+      await axios.post('user/logout');
       clearAuthHeader();
     } catch (error: any) {
       if (error.response) {

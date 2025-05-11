@@ -14,6 +14,7 @@ import storage from 'redux-persist/lib/storage';
 import { authReducer } from './auth/slice';
 import type { AuthState } from './auth/slice';
 import { dashReducer } from './dashboard/slice';
+import { orderReducer } from './orders/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -25,6 +26,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer<AuthState>(authPersistConfig, authReducer),
     dashboard: dashReducer,
+    order: orderReducer,
     modal: modalReducer,
   },
   middleware: getDefaultMiddleware =>
