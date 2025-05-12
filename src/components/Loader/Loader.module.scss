@@ -2,8 +2,10 @@
   width: 100%;
   min-height: 200px;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   padding: 20px 0;
 }
 .loader {
@@ -32,4 +34,7 @@
   100% {
     transform: rotate(1turn);
   }
+}
+.message {
+  color: rgb($main-dark-color, 0.5);
 }

@@ -1,13 +1,21 @@
 .tableWrap {
   max-width: 335px;
-  overflow-x: auto;
+  // overflow-x: auto;
   margin-top: 20px;
   border-radius: 8px;
-  overflow-y: hidden;
+  // overflow-y: hidden;
   border: 1px solid #1d1e211a;
 }
+:global(.simplebar-track.simplebar-horizontal) {
+  background: #f1f1f1;
+  bottom: -300px;
+  pointer-events: auto;
+}
+:global(.simplebar-scrollbar:before) {
+  background: #e6e6e6;
+}
 .tableTitle {
-  width: 334px;
+  width: 305px;
   padding: 14px;
   font-weight: 600;
   font-size: 16px;

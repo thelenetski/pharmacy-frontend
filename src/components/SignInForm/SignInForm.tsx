@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../redux/auth/operations';
 import { AppDispatch } from '../../redux/store';
 import { selectAuthLoading } from '../../redux/auth/selectors';
+import { useEffect, useState } from 'react';
 
 const schema = yup
   .object({
@@ -32,6 +33,21 @@ const SignInForm = () => {
   });
   const dispatch = useDispatch<AppDispatch>();
   const loading = useSelector(selectAuthLoading);
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    let timer: ReturnType<typeof setTimeout>;
+
+    if (loading.signIn) {
+      timer = setTimeout(() => {
+        setShowMessage(true);
+      }, 3000);
+    } else {
+      setShowMessage(false);
+    }
+
+    return () => clearTimeout(timer);
+  }, [loading.signIn]);
 
   const onSubmit: SubmitHandler<LoginFormInputs> = data => {
     dispatch(signIn(data));
@@ -69,7 +85,11 @@ const SignInForm = () => {
         className={css.loginButton}
         disabled={loading.signIn}
       >
-        {loading.signIn ? 'Loading...' : 'Log In'}
+        {loading.signIn
+          ? showMessage
+            ? 'Waiting for backend to start...'
+            : 'Loading...'
+          : 'Log In'}
       </button>
     </form>
   );

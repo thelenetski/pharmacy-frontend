@@ -4,3 +4,26 @@
   flex-wrap: wrap;
   margin-top: 20px;
 }
+
+.sliderTables {
+  width: 335px;
+  height: 85vh;
+}
+
+.sliderSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+:global(.swiper-pagination-bullet-active) {
+  width: 12px !important;
+  height: 12px !important;
+  background: $main-color !important;
+}
+:global(.swiper-pagination-bullet) {
+  width: 12px !important;
+  height: 12px !important;
+}
+:global(.swiper-pagination-bullets) {
+  bottom: 30% !important;
+}
