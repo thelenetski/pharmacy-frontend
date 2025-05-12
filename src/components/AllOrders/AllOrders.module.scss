@@ -12,7 +12,8 @@
   pointer-events: auto;
 }
 :global(.simplebar-scrollbar:before) {
-  background: #e6e6e6;
+  background: #e6e6e6 !important;
+  opacity: 1 !important;
 }
 .tableTitle {
   width: 305px;

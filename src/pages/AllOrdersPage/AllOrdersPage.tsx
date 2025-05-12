@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 import { getOrder } from '../../redux/orders/operations';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Virtual } from 'swiper/modules';
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 import {
   selectOrderPage,
   selectOrderTotalPages,

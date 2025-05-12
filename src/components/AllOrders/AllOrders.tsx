@@ -14,7 +14,6 @@ import {
 import { Order } from '../../redux/orders/slice';
 import clsx from 'clsx';
 import SimpleBarReact from 'simplebar-react';
-
 import 'simplebar-react/dist/simplebar.min.css';
 
 function AllOrders() {
