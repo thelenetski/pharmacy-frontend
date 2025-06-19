@@ -1,0 +1,31 @@
+.buttonWrap {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  transition: 0.3s ease-in-out;
+}
+.buttonWrap:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.buttonIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px;
+  height: 42px;
+  color: #fff;
+  background: $main-color;
+  border-radius: 60px;
+}
+.iconPlus {
+  transition: 0.3s ease-in-out;
+}
+.buttonWrap:hover .iconPlus {
+  transform: scale(1.2);
+}

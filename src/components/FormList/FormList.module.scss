@@ -1,0 +1,25 @@
+.catList {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 13px 18px;
+  border-radius: 15px;
+  background: $main-color;
+  color: #ffffff80;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.catList li {
+  margin-bottom: 6px;
+}
+
+.catList li:hover {
+  cursor: pointer;
+  color: #ffffff;
+  transition: 0.3s;
+}

@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
@@ -44,7 +44,7 @@ const clearAuthHeader = () => {
 export const signIn = createAsyncThunk<
   AuthResponse,
   Credentials,
-  { rejectValue: AuthError }
+  { rejectValue: string }
 >('auth/login', async (credentials, thunkAPI) => {
   try {
     const res = await axios.post<AuthResponse>('user/login', credentials, {
@@ -53,9 +53,10 @@ export const signIn = createAsyncThunk<
 
     setAuthHeader(res.data.data.accessToken);
     return res.data;
-  } catch (error: any) {
-    if (error.response) {
-      return thunkAPI.rejectWithValue(error.response.data);
+  } catch (err) {
+    const error = err as AxiosError<AuthError>;
+    if (error.response?.data?.message) {
+      return thunkAPI.rejectWithValue(error.response.data.message);
     }
     return thunkAPI.rejectWithValue(error.message || 'Unknown error');
   }
@@ -67,9 +68,10 @@ export const logOut = createAsyncThunk<void, void, { rejectValue: string }>(
     try {
       await axios.post('user/logout');
       clearAuthHeader();
-    } catch (error: any) {
-      if (error.response) {
-        return thunkAPI.rejectWithValue(error.response.data);
+    } catch (err) {
+      const error = err as AxiosError<AuthError>;
+      if (error.response?.data?.message) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
       }
       return thunkAPI.rejectWithValue(error.message || 'Unknown error');
     }
@@ -98,9 +100,10 @@ export const refreshUser = createAsyncThunk<
         { withCredentials: true }
       );
       return res.data;
-    } catch (error: any) {
-      if (error.response) {
-        return thunkAPI.rejectWithValue(error.response.data);
+    } catch (err) {
+      const error = err as AxiosError<AuthError>;
+      if (error.response?.data?.message) {
+        return thunkAPI.rejectWithValue(error.response.data.message);
       }
       return thunkAPI.rejectWithValue(error.message || 'Unknown error');
     }

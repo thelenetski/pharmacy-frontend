@@ -15,6 +15,8 @@ import { authReducer } from './auth/slice';
 import type { AuthState } from './auth/slice';
 import { dashReducer } from './dashboard/slice';
 import { orderReducer } from './orders/slice';
+import { productReducer } from './products/slice';
+import { supplierReducer } from './suppliers/slice';
 
 const authPersistConfig = {
   key: 'auth',
@@ -27,6 +29,8 @@ export const store = configureStore({
     auth: persistReducer<AuthState>(authPersistConfig, authReducer),
     dashboard: dashReducer,
     order: orderReducer,
+    product: productReducer,
+    supplier: supplierReducer,
     modal: modalReducer,
   },
   middleware: getDefaultMiddleware =>

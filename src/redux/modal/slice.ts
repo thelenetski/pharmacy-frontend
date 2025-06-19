@@ -5,14 +5,15 @@ export const modalTypes = {
   addSupplier: 'add-supplier',
   editProduct: 'edit-product',
   editSupplier: 'edit-supplier',
+  delete: 'delete',
 } as const;
 
-type ModalType = (typeof modalTypes)[keyof typeof modalTypes];
+export type ModalType = (typeof modalTypes)[keyof typeof modalTypes];
 
 interface ModalState {
   isOpen: boolean;
   type?: ModalType | null;
-  content?: unknown | null;
+  content?: any;
 }
 
 const initialState: ModalState = {
@@ -28,12 +29,12 @@ const modalSlice = createSlice({
     openModal(
       state,
       action: PayloadAction<{
-        type: keyof typeof modalTypes;
-        content?: unknown;
+        type: ModalType;
+        content?: any;
       }>
     ) {
       state.isOpen = true;
-      state.type = modalTypes[action.payload.type];
+      state.type = action.payload.type;
       state.content = action.payload.content ?? null;
     },
     closeModal(state) {

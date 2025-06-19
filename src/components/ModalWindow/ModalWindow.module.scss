@@ -1,12 +1,12 @@
 .modalWrapper {
   position: relative;
-  padding: 48px 16px;
-  border-radius: 15px;
-  background-color: $main-color8;
+  padding: 40px 20px;
+  border-radius: 12px;
   width: 100%;
   max-width: 375px;
   height: fit-content;
-  margin: 0 16px;
+  margin: 0 20px;
+  background: #ffffff;
 }
 
 .modalOverlay {
@@ -24,15 +24,15 @@
 
 .modalContent {
   position: relative;
-  border-radius: 15px;
+  border-radius: 12px;
   width: 100%;
   margin: auto;
 }
 
 .btnClose {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 14px;
+  right: 14px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -47,7 +47,7 @@
 .btnClose svg {
   width: 24px;
   height: 24px;
-  stroke: #2f2f2f;
+  stroke: #1d1e21;
 }
 
 @media screen and (max-width: 374px) {

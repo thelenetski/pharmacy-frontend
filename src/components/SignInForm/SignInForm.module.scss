@@ -12,12 +12,27 @@
   border-radius: 60px;
   padding: 13px 18px;
   color: $main-dark-color;
+  transition: 0.3s;
 }
 
 .loginInput::placeholder {
   color: #1d1e2166;
 }
-
+.formGroup {
+  position: relative;
+}
+.togglePassword {
+  height: 18px;
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  background: none;
+}
+.loginInput:focus {
+  outline: none;
+  border: 1px solid $main-color;
+}
 .loginInputError {
   font-weight: 400;
   font-size: 12px;

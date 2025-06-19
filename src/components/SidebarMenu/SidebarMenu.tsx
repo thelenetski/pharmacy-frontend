@@ -16,31 +16,31 @@ function SidebarMenu() {
         to="/dashboard"
         className={clsx(location.pathname === '/dashboard' && css.active)}
       >
-        <TbLayoutDashboardFilled />
+        <TbLayoutDashboardFilled size={14} />
       </Link>
       <Link
         to="/orders"
         className={clsx(location.pathname === '/orders' && css.active)}
       >
-        <IoMdCart size={13} />
+        <IoMdCart size={14} />
       </Link>
       <Link
         to="/products"
         className={clsx(location.pathname === '/products' && css.active)}
       >
-        <FaFlask />
+        <FaFlask size={14} />
       </Link>
       <Link
         to="/suppliers"
         className={clsx(location.pathname === '/suppliers' && css.active)}
       >
-        <MdLocalPharmacy />
+        <MdLocalPharmacy size={14} />
       </Link>
       <Link
         to="/customers"
         className={clsx(location.pathname === '/customers' && css.active)}
       >
-        <HiUsers />
+        <HiUsers size={14} />
       </Link>
     </div>
   );

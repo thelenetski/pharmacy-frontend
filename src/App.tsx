@@ -18,6 +18,12 @@ const DashboardPage = lazy(
 const AllOrdersPage = lazy(
   () => import('./pages/AllOrdersPage/AllOrdersPage.tsx')
 );
+const AllProductsPage = lazy(
+  () => import('./pages/AllProductsPage/AllProductsPage.tsx')
+);
+const AllSuppliersPage = lazy(
+  () => import('./pages/AllSuppliersPage/AllSuppliersPage.tsx')
+);
 const NotFoundPage = lazy(
   () => import('./pages/NotFoundPage/NotFoundPage.tsx')
 );
@@ -31,7 +37,7 @@ function App() {
       try {
         await dispatch(refreshUser());
       } catch (e) {
-        console.log(e);
+        console.log('error: ', e);
       }
     };
 
@@ -63,6 +69,21 @@ function App() {
           path="/orders"
           element={
             <PrivateRoute component={<AllOrdersPage />} redirectTo="/login" />
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <PrivateRoute component={<AllProductsPage />} redirectTo="/login" />
+          }
+        />
+        <Route
+          path="/suppliers"
+          element={
+            <PrivateRoute
+              component={<AllSuppliersPage />}
+              redirectTo="/login"
+            />
           }
         />
         <Route path="*" element={<NotFoundPage />} />

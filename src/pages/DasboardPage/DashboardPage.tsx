@@ -7,12 +7,17 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import Statistics from '../../components/Statistics/Statistics';
 import RecentCustomers from '../../components/RecentCustomers/RecentCustomers';
 import IncomeExpenses from '../../components/IncomeExpenses/IncomeExpenses';
+import { setSignOut } from '../../redux/auth/slice';
 
 function DashboardPage() {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(getDash());
+    try {
+      dispatch(getDash());
+    } catch {
+      dispatch(setSignOut());
+    }
   }, [dispatch]);
 
   return (

@@ -12,7 +12,6 @@ import {
   selectOrderLoading,
 } from '../../redux/orders/selectors';
 import { Order } from '../../redux/orders/slice';
-import clsx from 'clsx';
 import SimpleBarReact from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 
@@ -24,7 +23,7 @@ function AllOrders() {
   const columns = [
     columnHelper.accessor('name', {
       cell: info => {
-        const row = info.row.original; // весь объект Customer
+        const row = info.row.original;
         return (
           <div className={css.tableUser}>
             {loading.order ? (
@@ -86,17 +85,7 @@ function AllOrders() {
     columnHelper.accessor('status', {
       cell: info => {
         return (
-          <div
-            className={clsx(
-              info.getValue().toLowerCase() === 'completed' && css.completed,
-              info.getValue().toLowerCase() === 'confirmed' && css.confirmed,
-              info.getValue().toLowerCase() === 'pending' && css.pending,
-              info.getValue().toLowerCase() === 'cancelled' && css.cancelled,
-              info.getValue().toLowerCase() === 'processing' && css.processing,
-              info.getValue().toLowerCase() === 'shipped' && css.shipped,
-              info.getValue().toLowerCase() === 'delivered' && css.delivered
-            )}
-          >
+          <div className={css[info.getValue().toLowerCase()]}>
             {info.getValue()}
           </div>
         );

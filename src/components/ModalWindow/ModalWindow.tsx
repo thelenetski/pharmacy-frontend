@@ -5,6 +5,7 @@ import { selectIsOpenModal } from '../../redux/modal/selectors';
 import styles from './ModalWindow.module.scss';
 import { createPortal } from 'react-dom';
 import { ReactNode, useEffect } from 'react';
+import { IoClose } from 'react-icons/io5';
 
 interface ModalWindowProps {
   children: ReactNode;
@@ -39,9 +40,7 @@ const ModalWindow: React.FC<ModalWindowProps> = ({ children }) => {
             overlayClassName={styles.modalOverlay}
           >
             <button className={styles.btnClose} onClick={closeModalHandler}>
-              <svg>
-                <use href="/sprite.svg#close"></use>
-              </svg>
+              <IoClose size={24} />
             </button>
             <div className={styles.modalContent}>{children}</div>
           </Modal>

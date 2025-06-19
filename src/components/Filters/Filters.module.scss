@@ -1,0 +1,21 @@
+.searchWrap {
+  display: flex;
+  gap: 8px;
+}
+.searchWrap input {
+  width: 215px;
+}
+.searchWrap button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Inter';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  background-color: $main-color;
+  color: #fff;
+  border-radius: 60px;
+}

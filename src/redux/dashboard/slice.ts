@@ -36,6 +36,7 @@ export interface DashApiResponse {
 
 export interface DashState {
   data: DashboardData | null;
+  filters?: string;
   loading: {
     dash: boolean;
   };
@@ -51,11 +52,19 @@ const dashSlice = createSlice({
   name: 'dashboard',
   initialState: <DashState>{
     data: null,
+    filters: '',
     loading: {
       dash: false,
     },
   },
-  reducers: {},
+  reducers: {
+    setFilters: (state, action) => {
+      state.filters = action.payload;
+    },
+    resetFilters: state => {
+      state.filters = '';
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getDash.pending, state => {
@@ -72,4 +81,5 @@ const dashSlice = createSlice({
   },
 });
 
+export const { setFilters, resetFilters } = dashSlice.actions;
 export const dashReducer = dashSlice.reducer;

@@ -7,7 +7,7 @@
   display: flex;
   margin: 0 auto;
 
-  font-family: Inter, Arial, sans-serif;
+  font-family: 'Inter', Arial, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -19,9 +19,13 @@
 }
 
 body {
+  font-family: 'Inter', Arial, sans-serif;
   margin: 0;
   display: flex;
   background-color: $main-color6;
+}
+.no-scroll {
+  overflow: hidden;
 }
 .container {
   padding: 0 20px;

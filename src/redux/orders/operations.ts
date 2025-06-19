@@ -9,16 +9,17 @@ export interface OrderError {
 
 export interface OrderState {
   page?: number;
+  filters?: string;
 }
 
 export const getOrder = createAsyncThunk<
   OrdersResponse,
   OrderState,
   { rejectValue: OrderError }
->('order', async ({ page = 1 }, thunkAPI) => {
+>('order', async ({ page = 1, filters = '' }, thunkAPI) => {
   try {
     const res = await axios.get<OrdersResponse>('orders', {
-      params: { page },
+      params: { page, name: filters },
     });
     return res.data;
   } catch (error: any) {
