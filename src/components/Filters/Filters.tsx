@@ -19,13 +19,11 @@ function Filters({ name = 'User Name' }) {
   const [searchResult, setSearchResult] = useState('');
 
   const onSubmit: SubmitHandler<data> = data => {
-    dispatch(setFilters(data.keyword));
-    setSearchResult(data.keyword);
-    data.keyword !== searchResult && handler();
-  };
-
-  const handler = () => {
-    setLoad(true);
+    if (data.keyword !== searchResult) {
+      setSearchResult(data.keyword);
+      setLoad(true);
+      dispatch(setFilters(data.keyword));
+    }
   };
 
   useEffect(() => {
