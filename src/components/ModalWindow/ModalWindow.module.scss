@@ -7,6 +7,16 @@
   height: fit-content;
   margin: 0 20px;
   background: #ffffff;
+  animation: transitionIN 0.3s;
+}
+
+@keyframes transitionIN {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .modalOverlay {

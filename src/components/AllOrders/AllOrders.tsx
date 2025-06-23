@@ -106,51 +106,55 @@ function AllOrders() {
   return (
     <div className={css.tableWrap}>
       <h4 className={css.tableTitle}>All orders</h4>
-      <SimpleBarReact style={{ maxWidth: 335 }} autoHide={false}>
-        <table>
-          <thead>
-            {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map(header => (
-                  <th key={header.id} className={css.tableTH}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {loading.order
-              ? [...Array(5)].map((_, i) => (
-                  <tr key={i}>
-                    {columns.map((_, j) => (
-                      <td key={j}>
-                        <Skeleton count={1} height={20} />
-                        <Skeleton count={1} height={20} />
-                      </td>
-                    ))}
-                  </tr>
-                ))
-              : table.getRowModel().rows.map(row => (
-                  <tr key={row.id}>
-                    {row.getVisibleCells().map(cell => (
-                      <td key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-          </tbody>
-        </table>
-      </SimpleBarReact>
+      {data && data.length === 0 ? (
+        <p className="errorNothingFound">Nothing found</p>
+      ) : (
+        <SimpleBarReact style={{ maxWidth: 335 }} autoHide={false}>
+          <table>
+            <thead>
+              {table.getHeaderGroups().map(headerGroup => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map(header => (
+                    <th key={header.id} className={css.tableTH}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {loading.order
+                ? [...Array(5)].map((_, i) => (
+                    <tr key={i}>
+                      {columns.map((_, j) => (
+                        <td key={j}>
+                          <Skeleton count={1} height={20} />
+                          <Skeleton count={1} height={20} />
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                : table.getRowModel().rows.map(row => (
+                    <tr key={row.id}>
+                      {row.getVisibleCells().map(cell => (
+                        <td key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+        </SimpleBarReact>
+      )}
     </div>
   );
 }
