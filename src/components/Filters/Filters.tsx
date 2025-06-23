@@ -16,10 +16,12 @@ function Filters({ name = 'User Name' }) {
   const dispatch = useDispatch<AppDispatch>();
   const loading = useSelector(selectIsAnyLoading);
   const [load, setLoad] = useState(false);
+  const [searchResult, setSearchResult] = useState('');
 
   const onSubmit: SubmitHandler<data> = data => {
     dispatch(setFilters(data.keyword));
-    handler();
+    setSearchResult(data.keyword);
+    data.keyword !== searchResult && handler();
   };
 
   const handler = () => {
