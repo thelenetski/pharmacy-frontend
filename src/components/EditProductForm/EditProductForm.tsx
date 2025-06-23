@@ -16,6 +16,7 @@ import { editProduct, getProducts } from '../../redux/products/operations';
 import { AppDispatch } from '../../redux/store';
 import { selectContentModal } from '../../redux/modal/selectors';
 import FormList from '../FormList/FormList';
+import { selectFilters } from '../../redux/dashboard/selectors';
 
 export interface Data {
   name: string;
@@ -38,6 +39,7 @@ function EditProductForm() {
   const content = useSelector(selectContentModal);
   const page = useSelector(selectProductPage);
   const loading = useSelector(selectProductLoading);
+  const filters = useSelector(selectFilters);
   const [open, setOpen] = useState(false);
   const [catName, setCatName] = useState<string | null>(null);
   const categories = useSelector(selectProductCats);
@@ -78,7 +80,7 @@ function EditProductForm() {
             console.error(e.message);
           });
         dispatch(closeModal());
-        dispatch(getProducts({ page, filters: '' }));
+        dispatch(getProducts({ page, filters }));
       } catch (e) {
         console.error(e);
       }

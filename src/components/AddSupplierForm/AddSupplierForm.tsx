@@ -19,6 +19,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
 import { Box, Popover } from '@mui/material';
 import FormList from '../FormList/FormList';
+import { selectFilters } from '../../redux/dashboard/selectors';
 
 interface Data {
   name: string;
@@ -48,6 +49,7 @@ function AddSupplierForm() {
   const dispatch = useDispatch<AppDispatch>();
   const loading = useSelector(selectSuppliersLoading);
   const page = useSelector(selectSuppliersPage);
+  const filters = useSelector(selectFilters);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -79,7 +81,7 @@ function AddSupplierForm() {
             console.error(e.message);
           });
         dispatch(closeModal());
-        dispatch(getSuppliers({ page, filters: '' }));
+        dispatch(getSuppliers({ page, filters }));
       } catch (e) {
         console.error(e);
       }

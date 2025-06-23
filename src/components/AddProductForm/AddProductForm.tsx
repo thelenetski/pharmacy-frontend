@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import { addProduct, getProducts } from '../../redux/products/operations';
 import { AppDispatch } from '../../redux/store';
 import FormList from '../FormList/FormList';
+import { selectFilters } from '../../redux/dashboard/selectors';
 
 type data = {
   name: string;
@@ -40,6 +41,7 @@ const schema = yup.object().shape({
 function AddProductForm() {
   const dispatch = useDispatch<AppDispatch>();
   const loading = useSelector(selectProductLoading);
+  const filters = useSelector(selectFilters);
   const [open, setOpen] = useState(false);
   const [catName, setCatName] = useState<string | null>(null);
   const categories = useSelector(selectProductCats);
@@ -67,8 +69,8 @@ function AddProductForm() {
           .catch(e => {
             console.error(e.message);
           });
-        await dispatch(getProducts({ page: 1, filters: '' }));
-        await dispatch(closeModal());
+        dispatch(getProducts({ page: 1, filters }));
+        dispatch(closeModal());
       } catch (e) {
         console.error(e);
       }

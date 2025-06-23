@@ -20,6 +20,7 @@ import { LocalizationProvider, DateCalendar } from '@mui/x-date-pickers';
 import { Box, Popover } from '@mui/material';
 import { selectContentModal } from '../../redux/modal/selectors';
 import FormList from '../FormList/FormList';
+import { selectFilters } from '../../redux/dashboard/selectors';
 
 interface Data {
   name: string;
@@ -50,6 +51,7 @@ function EditSupplierForm() {
   const loading = useSelector(selectSuppliersLoading);
   const content = useSelector(selectContentModal);
   const page = useSelector(selectSuppliersPage);
+  const filters = useSelector(selectFilters);
   const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const [status, setStatus] = useState<string | null>(null);
@@ -92,7 +94,7 @@ function EditSupplierForm() {
             console.error(e.message);
           });
         dispatch(closeModal());
-        dispatch(getSuppliers({ page, filters: '' }));
+        dispatch(getSuppliers({ page, filters }));
       } catch (e) {
         console.error(e);
       }
