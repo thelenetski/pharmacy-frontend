@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from 'react-redux';
-import css from './AllProducts.module.scss';
+import { useSelector } from 'react-redux';
+import css from './AllCustomers.module.scss';
 import {
   createColumnHelper,
   flexRender,
@@ -11,127 +11,98 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import SimpleBarReact from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import {
-  selectProductData,
-  selectProductLoading,
-} from '../../redux/products/selectors';
-import { Product } from '../../redux/products/slice';
-import { FiEdit2, FiTrash2 } from 'react-icons/fi';
-import { modalTypes, openModal } from '../../redux/modal/slice';
-import { AppDispatch } from '../../redux/store';
+  selectCustomersData,
+  selectCustomersLoading,
+} from '../../redux/customers/selectors';
+import { Customer } from '../../redux/customers/slice';
 
-function AllProducts() {
-  const data = useSelector(selectProductData);
-  const loading = useSelector(selectProductLoading);
-  const dispatch = useDispatch<AppDispatch>();
+function AllCustomers() {
+  const data = useSelector(selectCustomersData);
+  const loading = useSelector(selectCustomersLoading);
 
-  const columnHelper = createColumnHelper<Product>();
+  const columnHelper = createColumnHelper<Customer>();
   const columns = [
     columnHelper.accessor('name', {
       cell: info => {
         const row = info.row.original;
         return (
           <div className={css.tableUser}>
-            {loading.product ? (
-              <>
-                <Skeleton count={1} />
-              </>
-            ) : (
+            <>
+              <img
+                src={row.image}
+                alt={row.name}
+                className={css.tableAvatar}
+                width={24}
+                height={24}
+              />
               <span>{row.name}</span>
-            )}
+            </>
           </div>
         );
       },
       header: () => {
-        return <span>Product Info</span>;
+        return <span>User Info</span>;
       },
     }),
-    columnHelper.accessor('category', {
+    columnHelper.accessor('email', {
       cell: info => {
         return <div className={css.category}>{info.getValue()}</div>;
       },
       header: () => {
-        return <span>Category</span>;
+        return <span>Email</span>;
       },
     }),
-    columnHelper.accessor('stock', {
+    columnHelper.accessor('address', {
       cell: info => {
         return <div className={css.stock}>{info.getValue()}</div>;
       },
       header: () => {
-        return <span>Stock</span>;
+        return <span>Address</span>;
       },
     }),
-    columnHelper.accessor('suppliers', {
+    columnHelper.accessor('phone', {
       cell: info => {
         return <div className={css.cellPadding}>{info.getValue()}</div>;
       },
       header: () => {
-        return <span>Suppliers</span>;
+        return <span>Phone</span>;
       },
     }),
-    columnHelper.accessor('price', {
+    columnHelper.accessor('register_date', {
       cell: info => {
         return <div className={css.cellPadding}>{info.getValue()}</div>;
       },
       header: () => {
-        return <span>Price</span>;
+        return <span>Register date</span>;
       },
-    }),
-    columnHelper.accessor('_id', {
-      cell: info => {
-        return (
-          <div className={css.actionGroup}>
-            <button
-              onClick={() => {
-                dispatch(
-                  openModal({
-                    type: modalTypes.editProduct,
-                    content: data?.find(p => p._id === info.getValue()) ?? null,
-                  })
-                );
-              }}
-              className="edit"
-            >
-              <FiEdit2 size={16} />
-            </button>
-            <button
-              onClick={() => {
-                dispatch(
-                  openModal({
-                    type: modalTypes.delete,
-                    content: { type: 'product', id: info.getValue() },
-                  })
-                );
-              }}
-              className="delete"
-            >
-              <FiTrash2 size={16} />
-            </button>
-          </div>
-        );
-      },
-      header: () => {
-        return <span>Action</span>;
-      },
+      size: 270,
     }),
   ];
 
-  const table = useReactTable<Product>({
+  const table = useReactTable<Customer>({
     data: data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
+    columnResizeMode: 'onChange',
   });
 
   return (
     <div className={css.tableWrap}>
-      <h4 className={css.tableTitle}>All products</h4>
+      <h4 className={css.tableTitle}>Customers Data</h4>
       <SimpleBarReact style={{ maxWidth: 335 }} autoHide={false}>
         <table>
           <thead>
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header => (
-                  <th key={header.id} className={css.tableTH}>
+                  <th
+                    key={header.id}
+                    className={css.tableTH}
+                    style={{
+                      width: header.getSize(),
+                      maxWidth: header.column.columnDef.size,
+                    }}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -144,7 +115,7 @@ function AllProducts() {
             ))}
           </thead>
           <tbody>
-            {loading.product
+            {loading.customer
               ? [...Array(5)].map((_, i) => (
                   <tr key={i}>
                     {columns.map((_, j) => (
@@ -173,4 +144,4 @@ function AllProducts() {
   );
 }
 
-export default AllProducts;
+export default AllCustomers;

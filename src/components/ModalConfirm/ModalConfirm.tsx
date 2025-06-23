@@ -4,24 +4,35 @@ import css from './ModalConfirm.module.scss';
 import { AppDispatch } from '../../redux/store';
 import { selectContentModal } from '../../redux/modal/selectors';
 import { selectProductLoading } from '../../redux/products/selectors';
+import { deleteSupplier } from '../../redux/suppliers/operations';
+import { deleteProduct } from '../../redux/products/operations';
+import { selectSuppliersLoading } from '../../redux/suppliers/selectors';
 
-type ModalConfirmProps = {
-  onConfirm: (content: any) => Promise<any>;
-};
-
-function ModalConfirm({ onConfirm }: ModalConfirmProps) {
+function ModalConfirm() {
   const dispatch = useDispatch<AppDispatch>();
   const content = useSelector(selectContentModal);
-  const loading = useSelector(selectProductLoading);
+  const loading1 = useSelector(selectProductLoading);
+  const loading2 = useSelector(selectSuppliersLoading);
+
+  const loading =
+    (content.type === 'supplier' && loading2.supplier) ||
+    (content.type === 'product' && loading1.product);
 
   const handleConfirm = () => {
     if (!content) return;
 
-    onConfirm(content)
-      .then(() => dispatch(closeModal()))
-      .catch(err => {
-        console.error('Confirmation error:', err);
-      });
+    const action =
+      (content.type === 'supplier' && deleteSupplier(content.id)) ||
+      (content.type === 'product' && deleteProduct(content.id));
+
+    action &&
+      dispatch(action)
+        .unwrap()
+        .then(() => dispatch(closeModal()))
+        .catch(err => {
+          console.error('Confirmation error:', err);
+          dispatch(closeModal());
+        });
   };
 
   return (
@@ -33,9 +44,9 @@ function ModalConfirm({ onConfirm }: ModalConfirmProps) {
             type="button"
             className={css.addBtn}
             onClick={handleConfirm}
-            disabled={loading.product}
+            disabled={loading}
           >
-            {loading.product ? 'Loading...' : 'Confirm'}
+            {loading ? 'Loading...' : 'Confirm'}
           </button>
           <button
             type="button"

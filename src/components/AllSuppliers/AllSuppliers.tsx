@@ -7,6 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import SimpleBarReact from 'simplebar-react';
 import 'simplebar-react/dist/simplebar.min.css';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
@@ -117,7 +118,7 @@ function AllSuppliers() {
                 dispatch(
                   openModal({
                     type: modalTypes.delete,
-                    content: info.getValue(),
+                    content: { type: 'supplier', id: info.getValue() },
                   })
                 );
               }}

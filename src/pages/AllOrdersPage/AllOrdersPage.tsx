@@ -44,9 +44,9 @@ function AllOrdersPage() {
           const currentIndex = swiper.activeIndex + 1;
           if (page) {
             if (currentIndex > page) {
-              dispatch(getOrder({ page: currentIndex }));
+              dispatch(getOrder({ page: currentIndex, filters }));
             } else if (currentIndex < page) {
-              dispatch(getOrder({ page: currentIndex }));
+              dispatch(getOrder({ page: currentIndex, filters }));
             }
           }
         }}

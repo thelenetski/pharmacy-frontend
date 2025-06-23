@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { SuppliersResponse } from './slice';
+import { DeleteSupplierResponse, SuppliersResponse } from './slice';
 
 export interface SupplierError {
   message: string;
@@ -66,6 +66,22 @@ export const editSupplier = createAsyncThunk<
       `suppliers/${data.id}`,
       data
     );
+    return res.data;
+  } catch (error: any) {
+    if (error.response) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+    return thunkAPI.rejectWithValue(error.message || 'Unknown error');
+  }
+});
+
+export const deleteSupplier = createAsyncThunk<
+  DeleteSupplierResponse,
+  string,
+  { rejectValue: SupplierError }
+>('supplier/del', async (id, thunkAPI) => {
+  try {
+    const res = await axios.delete<DeleteSupplierResponse>(`suppliers/${id}`);
     return res.data;
   } catch (error: any) {
     if (error.response) {

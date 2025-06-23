@@ -1,0 +1,24 @@
+.suppliersWrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+
+.sliderTables {
+  width: 335px;
+  height: 80vh;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  width: 12px !important;
+  height: 12px !important;
+  background: $main-color !important;
+}
+:global(.swiper-pagination-bullet) {
+  width: 12px !important;
+  height: 12px !important;
+}
+:global(.swiper-pagination-bullets) {
+  bottom: 15% !important;
+}

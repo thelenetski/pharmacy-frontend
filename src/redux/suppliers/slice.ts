@@ -1,5 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { addSuppliers, editSupplier, getSuppliers } from './operations';
+import {
+  addSuppliers,
+  deleteSupplier,
+  editSupplier,
+  getSuppliers,
+} from './operations';
 
 export interface Supplier {
   _id: string;
@@ -22,6 +27,12 @@ export interface SuppliersResponse {
   hasPreviousPage?: boolean;
   data: Supplier[];
   categories: string[];
+}
+
+export interface DeleteSupplierResponse {
+  status: number;
+  message: string;
+  data: string;
 }
 
 export interface SupplierState {
@@ -82,7 +93,22 @@ const supplierSlice = createSlice({
       .addCase(editSupplier.fulfilled, state => {
         state.loading.add = false;
       })
-      .addCase(editSupplier.rejected, handleRejected);
+      .addCase(editSupplier.rejected, handleRejected)
+      .addCase(deleteSupplier.pending, state => {
+        state.loading.supplier = true;
+      })
+      .addCase(
+        deleteSupplier.fulfilled,
+        (state, action: PayloadAction<DeleteSupplierResponse>) => {
+          if (state.data) {
+            state.data = state.data.filter(
+              item => item._id !== action.payload.data
+            );
+          }
+          state.loading.supplier = false;
+        }
+      )
+      .addCase(deleteSupplier.rejected, handleRejected);
   },
 });
 

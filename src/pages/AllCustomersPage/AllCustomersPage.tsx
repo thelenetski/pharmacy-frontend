@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './AllSuppliersPage.module.scss';
+import css from './AllCustomersPage.module.scss';
 import { AppDispatch } from '../../redux/store';
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -9,20 +9,18 @@ import Filters from '../../components/Filters/Filters';
 import { resetFilters } from '../../redux/dashboard/slice';
 import { setSignOut } from '../../redux/auth/slice';
 import { selectFilters } from '../../redux/dashboard/selectors';
-import AddButton from '../../components/AddButton/AddButton';
-import { modalTypes } from '../../redux/modal/slice';
-import { getSuppliers } from '../../redux/suppliers/operations';
-import AllSuppliers from '../../components/AllSuppliers/AllSuppliers';
+import { getCustomers } from '../../redux/customers/operations';
 import {
-  selectSuppliersPage,
-  selectSuppliersTotalPages,
-} from '../../redux/suppliers/selectors';
+  selectCustomersPage,
+  selectCustomersTotalPages,
+} from '../../redux/customers/selectors';
+import AllCustomers from '../../components/AllCustomers/AllCustomers';
 
-function AllSuppliersPage() {
+function AllCustomersPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const page = useSelector(selectSuppliersPage);
+  const page = useSelector(selectCustomersPage);
   const filters = useSelector(selectFilters);
-  const totalPages: number = useSelector(selectSuppliersTotalPages) || 1;
+  const totalPages: number = useSelector(selectCustomersTotalPages) || 1;
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
 
   useEffect(() => {
@@ -32,7 +30,7 @@ function AllSuppliersPage() {
 
   useEffect(() => {
     try {
-      !firstLoad && dispatch(getSuppliers({ page: 1, filters }));
+      !firstLoad && dispatch(getCustomers({ page: 1, filters }));
     } catch {
       dispatch(setSignOut());
     }
@@ -40,16 +38,15 @@ function AllSuppliersPage() {
 
   return (
     <div className={css.suppliersWrap}>
-      <Filters name="Supplier Name" />
-      <AddButton name="Add a new supplier" type={modalTypes.addSupplier} />
+      <Filters name="User Name" />
       <Swiper
         onSlideChange={swiper => {
           const currentIndex = swiper.activeIndex + 1;
           if (page) {
             if (currentIndex > page) {
-              dispatch(getSuppliers({ page: currentIndex, filters }));
+              dispatch(getCustomers({ page: currentIndex, filters }));
             } else if (currentIndex < page) {
-              dispatch(getSuppliers({ page: currentIndex, filters }));
+              dispatch(getCustomers({ page: currentIndex, filters }));
             }
           }
         }}
@@ -70,7 +67,7 @@ function AllSuppliersPage() {
             virtualIndex={index}
             className={css.sliderSlide}
           >
-            <AllSuppliers />
+            <AllCustomers />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -78,4 +75,4 @@ function AllSuppliersPage() {
   );
 }
 
-export default AllSuppliersPage;
+export default AllCustomersPage;

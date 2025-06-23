@@ -47,9 +47,9 @@ function AllProductsPage() {
           const currentIndex = swiper.activeIndex + 1;
           if (page) {
             if (currentIndex > page) {
-              dispatch(getProducts({ page: currentIndex }));
+              dispatch(getProducts({ page: currentIndex, filters }));
             } else if (currentIndex < page) {
-              dispatch(getProducts({ page: currentIndex }));
+              dispatch(getProducts({ page: currentIndex, filters }));
             }
           }
         }}

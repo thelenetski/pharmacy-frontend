@@ -1,7 +1,7 @@
 import { ReactNode, Suspense, useEffect, useState } from 'react';
 import style from './SharedLayout.module.scss';
 import Loader from '../Loader/Loader';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectTypeModal } from '../../redux/modal/selectors';
 import Header from '../Header/Header';
 import { useLocation } from 'react-router-dom';
@@ -13,15 +13,12 @@ import ModalConfirm from '../ModalConfirm/ModalConfirm';
 import EditProductForm from '../EditProductForm/EditProductForm';
 import EditSupplierForm from '../EditSupplierForm/EditSupplierForm';
 import AddSupplierForm from '../AddSupplierForm/AddSupplierForm';
-import { deleteProduct } from '../../redux/products/operations';
-import { AppDispatch } from '../../redux/store';
 
 interface SharedLayoutProps {
   children: ReactNode;
 }
 
 const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
-  const dispatch = useDispatch<AppDispatch>();
   const type = useSelector(selectTypeModal);
   const location = useLocation();
   const [headerType, setHeaderType] = useState('simple');
@@ -49,11 +46,7 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
           {type === modalTypes.editProduct && <EditProductForm />}
           {type === modalTypes.addSupplier && <AddSupplierForm />}
           {type === modalTypes.editSupplier && <EditSupplierForm />}
-          {type === modalTypes.delete && (
-            <ModalConfirm
-              onConfirm={content => dispatch(deleteProduct(content)).unwrap()}
-            />
-          )}
+          {type === modalTypes.delete && <ModalConfirm />}
         </ModalWindow>
       </main>
     </div>

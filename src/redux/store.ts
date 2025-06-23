@@ -17,11 +17,12 @@ import { dashReducer } from './dashboard/slice';
 import { orderReducer } from './orders/slice';
 import { productReducer } from './products/slice';
 import { supplierReducer } from './suppliers/slice';
+import { customersReducer } from './customers/slice';
 
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token'],
+  whitelist: ['token', 'isSignedIn'],
 };
 
 export const store = configureStore({
@@ -31,6 +32,7 @@ export const store = configureStore({
     order: orderReducer,
     product: productReducer,
     supplier: supplierReducer,
+    customers: customersReducer,
     modal: modalReducer,
   },
   middleware: getDefaultMiddleware =>

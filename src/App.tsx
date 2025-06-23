@@ -24,6 +24,9 @@ const AllProductsPage = lazy(
 const AllSuppliersPage = lazy(
   () => import('./pages/AllSuppliersPage/AllSuppliersPage.tsx')
 );
+const AllCustomersPage = lazy(
+  () => import('./pages/AllCustomersPage/AllCustomersPage.tsx')
+);
 const NotFoundPage = lazy(
   () => import('./pages/NotFoundPage/NotFoundPage.tsx')
 );
@@ -82,6 +85,15 @@ function App() {
           element={
             <PrivateRoute
               component={<AllSuppliersPage />}
+              redirectTo="/login"
+            />
+          }
+        />
+        <Route
+          path="/customers"
+          element={
+            <PrivateRoute
+              component={<AllCustomersPage />}
               redirectTo="/login"
             />
           }
