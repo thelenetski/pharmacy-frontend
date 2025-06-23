@@ -46,7 +46,6 @@ export const addSuppliers = createAsyncThunk<
 >('supplier/add', async (data, thunkAPI) => {
   try {
     const res = await axios.post<SuppliersResponse>('suppliers', data);
-    console.log(res.data);
     return res.data;
   } catch (error: any) {
     if (error.response) {

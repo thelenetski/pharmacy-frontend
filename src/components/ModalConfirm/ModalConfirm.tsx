@@ -3,20 +3,14 @@ import { closeModal } from '../../redux/modal/slice';
 import css from './ModalConfirm.module.scss';
 import { AppDispatch } from '../../redux/store';
 import { selectContentModal } from '../../redux/modal/selectors';
-import { selectProductLoading } from '../../redux/products/selectors';
 import { deleteSupplier } from '../../redux/suppliers/operations';
 import { deleteProduct } from '../../redux/products/operations';
-import { selectSuppliersLoading } from '../../redux/suppliers/selectors';
+import { selectIsAnyLoading } from '../../redux/selectIsAnyLoading';
 
 function ModalConfirm() {
   const dispatch = useDispatch<AppDispatch>();
   const content = useSelector(selectContentModal);
-  const loading1 = useSelector(selectProductLoading);
-  const loading2 = useSelector(selectSuppliersLoading);
-
-  const loading =
-    (content.type === 'supplier' && loading2.supplier) ||
-    (content.type === 'product' && loading1.product);
+  const loading = useSelector(selectIsAnyLoading);
 
   const handleConfirm = () => {
     if (!content) return;
