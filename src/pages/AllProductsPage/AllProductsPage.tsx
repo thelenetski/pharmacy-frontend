@@ -24,6 +24,8 @@ function AllProductsPage() {
   const filters = useSelector(selectFilters);
   const totalPages: number = useSelector(selectProductTotalPages) || 1;
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
     dispatch(resetFilters());
@@ -38,27 +40,49 @@ function AllProductsPage() {
     }
   }, [dispatch, filters, firstLoad]);
 
+  const getSwiperStyleBullets = (
+    total: number,
+    current: number,
+    maxVisible = 5
+  ): number[] => {
+    const half = Math.floor(maxVisible / 2);
+
+    if (total <= maxVisible) {
+      return Array.from({ length: total }, (_, i) => i);
+    }
+
+    if (current <= half) {
+      return Array.from({ length: maxVisible }, (_, i) => i);
+    }
+
+    if (current >= total - half - 1) {
+      return Array.from(
+        { length: maxVisible },
+        (_, i) => total - maxVisible + i
+      );
+    }
+
+    return Array.from({ length: maxVisible }, (_, i) => current - half + i);
+  };
+
   return (
     <div className={css.productsWrap}>
       <Filters name="Product Name" />
       <AddButton type={modalTypes.addProduct} />
       <Swiper
+        onSwiper={setSwiperInstance}
         onSlideChange={swiper => {
-          const currentIndex = swiper.activeIndex + 1;
-          if (page) {
-            if (currentIndex > page) {
-              dispatch(getProducts({ page: currentIndex, filters }));
-            } else if (currentIndex < page) {
-              dispatch(getProducts({ page: currentIndex, filters }));
-            }
+          const newIndex = swiper.activeIndex;
+
+          setActiveIndex(newIndex);
+
+          if (page !== newIndex + 1) {
+            dispatch(getProducts({ page: newIndex + 1, filters }));
           }
         }}
         spaceBetween={20}
         slidesPerView={1}
-        pagination={{
-          dynamicBullets: true,
-          clickable: true,
-        }}
+        pagination={false}
         allowTouchMove={false}
         modules={[Pagination, Virtual]}
         className={css.sliderTables}
@@ -71,6 +95,17 @@ function AllProductsPage() {
             className={css.sliderSlide}
           >
             <AllProducts />
+            <div className={css.paginationWrap}>
+              {getSwiperStyleBullets(totalPages, activeIndex).map(index => (
+                <button
+                  key={index}
+                  className={`${css.bullet} ${
+                    index === activeIndex ? css.active : ''
+                  }`}
+                  onClick={() => swiperInstance?.slideTo(index, 0)}
+                />
+              ))}
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

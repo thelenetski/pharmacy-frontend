@@ -21,6 +21,7 @@ import { Box, Popover } from '@mui/material';
 import { selectContentModal } from '../../redux/modal/selectors';
 import FormList from '../FormList/FormList';
 import { selectFilters } from '../../redux/dashboard/selectors';
+import { FiCalendar } from 'react-icons/fi';
 
 interface Data {
   name: string;
@@ -108,13 +109,13 @@ function EditSupplierForm() {
       <>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={css.formWrap}>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Suppliers Info" {...register('name')} />
               {errors.name && (
                 <p className={css.error}>{errors.name.message?.toString()}</p>
               )}
             </label>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Address" {...register('address')} />
               {errors.address && (
                 <p className={css.error}>
@@ -122,7 +123,7 @@ function EditSupplierForm() {
                 </p>
               )}
             </label>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Company" {...register('suppliers')} />
               {errors.suppliers && (
                 <p className={css.error}>
@@ -134,7 +135,7 @@ function EditSupplierForm() {
             <ThemeProvider theme={md3Theme}>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <Box>
-                  <label className={css.langInput}>
+                  <label className={css.dateInput}>
                     <input
                       placeholder="Delivery date"
                       {...register('date')}
@@ -148,6 +149,7 @@ function EditSupplierForm() {
                         {errors.date.message?.toString()}
                       </p>
                     )}
+                    <FiCalendar size={16} className={css.iconCalendar} />
                   </label>
                   <Popover
                     open={Boolean(anchorEl)}
@@ -177,7 +179,7 @@ function EditSupplierForm() {
               </LocalizationProvider>
             </ThemeProvider>
 
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Amount" {...register('amount')} />
               {errors.amount && (
                 <p className={css.error}>{errors.amount.message?.toString()}</p>

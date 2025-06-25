@@ -31,27 +31,15 @@
 .filterItemWrap {
   position: relative;
 }
-.catList {
-  position: absolute;
-  top: 48px;
-  left: 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 13px 18px;
-  border-radius: 15px;
-  background: $main-color;
-  color: #ffffff80;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 18px;
+.dateInput {
+  position: relative;
 }
-
-.catList li:hover {
-  cursor: pointer;
-  color: #ffffff;
-  transition: 0.3s;
+.dateInput svg {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  color: $main-color;
 }
 .error {
   font-weight: 400;

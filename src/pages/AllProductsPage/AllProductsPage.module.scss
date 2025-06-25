@@ -1,13 +1,13 @@
 .productsWrap {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   margin-top: 40px;
+  height: 100%;
 }
 
 .sliderTables {
   width: 335px;
-  height: 80vh;
+  height: 100%;
 }
 
 // .sliderSlide {
@@ -26,4 +26,28 @@
 }
 :global(.swiper-pagination-bullets) {
   bottom: 15% !important;
+}
+
+.paginationWrap {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+.bullet {
+  width: 10px;
+  height: 10px;
+  background: $main-color4;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+
+  &.active {
+    background: $main-color;
+  }
+  &.animate {
+    transform: scale(1.3);
+  }
 }

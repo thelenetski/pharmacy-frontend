@@ -94,7 +94,7 @@ function EditProductForm() {
       <>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={css.formWrap}>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Product Info" {...register('name')} />
               {errors.name && (
                 <p className={css.error}>{errors.name.message?.toString()}</p>
@@ -121,7 +121,7 @@ function EditProductForm() {
                 </p>
               )}
             </div>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Suppliers" {...register('suppliers')} />
               {errors.suppliers && (
                 <p className={css.error}>
@@ -129,13 +129,13 @@ function EditProductForm() {
                 </p>
               )}
             </label>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Stock" {...register('stock')} />
               {errors.stock && (
                 <p className={css.error}>{errors.stock.message?.toString()}</p>
               )}
             </label>
-            <label className={css.langInput}>
+            <label>
               <input placeholder="Price" {...register('price')} />
               {errors.price && (
                 <p className={css.error}>{errors.price.message?.toString()}</p>
