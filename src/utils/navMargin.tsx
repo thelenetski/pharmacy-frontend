@@ -1,5 +1,5 @@
 export const navMargin = (ref: HTMLDivElement | null) => {
-  const windowHeight = window.innerHeight;
+  // const windowHeight = window.innerHeight;
 
   if (ref) {
     const rect = ref.getBoundingClientRect();
