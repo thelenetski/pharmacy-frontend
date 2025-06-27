@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './AllProductsPage.module.scss';
 import { AppDispatch } from '../../redux/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Virtual } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
@@ -17,6 +17,7 @@ import { setSignOut } from '../../redux/auth/slice';
 import { selectFilters } from '../../redux/dashboard/selectors';
 import AddButton from '../../components/AddButton/AddButton';
 import { modalTypes } from '../../redux/modal/slice';
+import { navMargin } from '../../utils/navMargin';
 
 function AllProductsPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -24,8 +25,7 @@ function AllProductsPage() {
   const filters = useSelector(selectFilters);
   const totalPages: number = useSelector(selectProductTotalPages) || 1;
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     dispatch(resetFilters());
@@ -40,53 +40,39 @@ function AllProductsPage() {
     }
   }, [dispatch, filters, firstLoad]);
 
-  const getSwiperStyleBullets = (
-    total: number,
-    current: number,
-    maxVisible = 5
-  ): number[] => {
-    const half = Math.floor(maxVisible / 2);
-
-    if (total <= maxVisible) {
-      return Array.from({ length: total }, (_, i) => i);
-    }
-
-    if (current <= half) {
-      return Array.from({ length: maxVisible }, (_, i) => i);
-    }
-
-    if (current >= total - half - 1) {
-      return Array.from(
-        { length: maxVisible },
-        (_, i) => total - maxVisible + i
-      );
-    }
-
-    return Array.from({ length: maxVisible }, (_, i) => current - half + i);
-  };
+  useEffect(() => {
+    ref.current && navMargin(ref.current);
+  }, [ref.current]);
 
   return (
     <div className={css.productsWrap}>
       <Filters name="Product Name" />
       <AddButton type={modalTypes.addProduct} />
       <Swiper
-        onSwiper={setSwiperInstance}
+        onInit={() => {
+          if (ref.current) navMargin(ref.current);
+        }}
         onSlideChange={swiper => {
-          const newIndex = swiper.activeIndex;
-
-          setActiveIndex(newIndex);
-
-          if (page !== newIndex + 1) {
-            dispatch(getProducts({ page: newIndex + 1, filters }));
+          const currentIndex = swiper.activeIndex + 1;
+          if (page) {
+            if (currentIndex > page) {
+              dispatch(getProducts({ page: currentIndex, filters }));
+            } else if (currentIndex < page) {
+              dispatch(getProducts({ page: currentIndex, filters }));
+            }
           }
         }}
         spaceBetween={20}
         slidesPerView={1}
-        pagination={false}
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
         allowTouchMove={false}
         modules={[Pagination, Virtual]}
         className={css.sliderTables}
         virtual
+        speed={0}
       >
         {Array.from({ length: totalPages }).map((_, index) => (
           <SwiperSlide
@@ -94,18 +80,7 @@ function AllProductsPage() {
             virtualIndex={index}
             className={css.sliderSlide}
           >
-            <AllProducts />
-            <div className={css.paginationWrap}>
-              {getSwiperStyleBullets(totalPages, activeIndex).map(index => (
-                <button
-                  key={index}
-                  className={`${css.bullet} ${
-                    index === activeIndex ? css.active : ''
-                  }`}
-                  onClick={() => swiperInstance?.slideTo(index, 0)}
-                />
-              ))}
-            </div>
+            <AllProducts ref={ref} />
           </SwiperSlide>
         ))}
       </Swiper>

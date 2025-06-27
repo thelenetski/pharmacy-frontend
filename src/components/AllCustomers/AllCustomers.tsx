@@ -15,8 +15,9 @@ import {
   selectCustomersLoading,
 } from '../../redux/customers/selectors';
 import { Customer } from '../../redux/customers/slice';
+import { forwardRef } from 'react';
 
-function AllCustomers() {
+const AllCustomers = forwardRef<HTMLDivElement, {}>((_, ref) => {
   const data = useSelector(selectCustomersData);
   const loading = useSelector(selectCustomersLoading);
 
@@ -87,7 +88,7 @@ function AllCustomers() {
   });
 
   return (
-    <div className={css.tableWrap}>
+    <div className={css.tableWrap} ref={ref}>
       <h4 className={css.tableTitle}>Customers Data</h4>
       {data && data.length === 0 ? (
         <p className="errorNothingFound">Nothing found</p>
@@ -146,6 +147,6 @@ function AllCustomers() {
       )}
     </div>
   );
-}
+});
 
 export default AllCustomers;

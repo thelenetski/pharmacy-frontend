@@ -18,8 +18,9 @@ import { Product } from '../../redux/products/slice';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { modalTypes, openModal } from '../../redux/modal/slice';
 import { AppDispatch } from '../../redux/store';
+import { forwardRef } from 'react';
 
-function AllProducts() {
+const AllProducts = forwardRef<HTMLDivElement, {}>((_, ref) => {
   const data = useSelector(selectProductData);
   const loading = useSelector(selectProductLoading);
   const dispatch = useDispatch<AppDispatch>();
@@ -123,7 +124,7 @@ function AllProducts() {
   });
 
   return (
-    <div className={css.tableWrap}>
+    <div className={css.tableWrap} ref={ref}>
       <h4 className={css.tableTitle}>All products</h4>
       {data && data.length === 0 ? (
         <p className="errorNothingFound">Nothing found</p>
@@ -175,6 +176,6 @@ function AllProducts() {
       )}
     </div>
   );
-}
+});
 
 export default AllProducts;

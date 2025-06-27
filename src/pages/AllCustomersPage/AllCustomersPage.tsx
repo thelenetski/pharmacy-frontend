@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './AllCustomersPage.module.scss';
 import { AppDispatch } from '../../redux/store';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Virtual } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
@@ -15,6 +15,7 @@ import {
   selectCustomersTotalPages,
 } from '../../redux/customers/selectors';
 import AllCustomers from '../../components/AllCustomers/AllCustomers';
+import { navMargin } from '../../utils/navMargin';
 
 function AllCustomersPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -22,6 +23,7 @@ function AllCustomersPage() {
   const filters = useSelector(selectFilters);
   const totalPages: number = useSelector(selectCustomersTotalPages) || 1;
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     dispatch(resetFilters());
@@ -36,6 +38,10 @@ function AllCustomersPage() {
     }
   }, [dispatch, filters, firstLoad]);
 
+  useEffect(() => {
+    ref.current && navMargin(ref.current);
+  }, [ref.current]);
+
   return (
     <div className={css.suppliersWrap}>
       <Filters name="User Name" />
@@ -49,6 +55,9 @@ function AllCustomersPage() {
               dispatch(getCustomers({ page: currentIndex, filters }));
             }
           }
+          if (ref.current) {
+            navMargin(ref.current);
+          }
         }}
         spaceBetween={20}
         slidesPerView={1}
@@ -60,6 +69,7 @@ function AllCustomersPage() {
         modules={[Pagination, Virtual]}
         className={css.sliderTables}
         virtual
+        speed={0}
       >
         {Array.from({ length: totalPages }).map((_, index) => (
           <SwiperSlide
@@ -67,7 +77,7 @@ function AllCustomersPage() {
             virtualIndex={index}
             className={css.sliderSlide}
           >
-            <AllCustomers />
+            <AllCustomers ref={ref} />
           </SwiperSlide>
         ))}
       </Swiper>

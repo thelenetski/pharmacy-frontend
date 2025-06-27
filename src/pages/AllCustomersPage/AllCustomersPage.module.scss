@@ -1,4 +1,5 @@
 .suppliersWrap {
+  height: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -7,7 +8,7 @@
 
 .sliderTables {
   width: 335px;
-  height: 80vh;
+  height: calc(100% - 55px);
 }
 
 :global(.swiper-pagination-bullet-active) {
@@ -18,7 +19,4 @@
 :global(.swiper-pagination-bullet) {
   width: 12px !important;
   height: 12px !important;
-}
-:global(.swiper-pagination-bullets) {
-  bottom: 15% !important;
 }
