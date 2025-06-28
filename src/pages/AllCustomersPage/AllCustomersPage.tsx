@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './AllCustomersPage.module.scss';
 import { AppDispatch } from '../../redux/store';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Virtual } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
@@ -22,7 +22,6 @@ function AllCustomersPage() {
   const filters = useSelector(selectFilters);
   const totalPages: number = useSelector(selectCustomersTotalPages) || 1;
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
-  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     dispatch(resetFilters());
