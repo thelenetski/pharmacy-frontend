@@ -1,3 +1,14 @@
+.loginForm {
+  @include media('tablet') {
+    width: 323px;
+  }
+  @include media('desktop') {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-right: 10%;
+  }
+}
 .loginInputsBox {
   width: 100%;
   display: flex;

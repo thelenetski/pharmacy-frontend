@@ -1,22 +1,11 @@
-.suppliersWrap {
+.customersWrap {
   height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   margin-top: 40px;
 }
 
 .sliderTables {
   width: 335px;
-  height: calc(100% - 55px);
-}
-
-:global(.swiper-pagination-bullet-active) {
-  width: 12px !important;
-  height: 12px !important;
-  background: $main-color !important;
-}
-:global(.swiper-pagination-bullet) {
-  width: 12px !important;
-  height: 12px !important;
+  min-height: calc(100% - 55px);
 }

@@ -3,15 +3,6 @@
   height: 100%;
 }
 
-.wrapperBG {
-  background-image: image-set(
-    url('/src/assets/images/bg-elem.png') 1x,
-    url('/src/assets/images/bg-elem@2x.png') 2x
-  );
-  background-repeat: no-repeat;
-  background-position: -100% 145%;
-}
-
 .main {
   display: flex;
   flex-direction: column;

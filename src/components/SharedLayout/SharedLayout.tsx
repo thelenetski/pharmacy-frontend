@@ -1,5 +1,5 @@
 import { ReactNode, Suspense, useEffect, useState } from 'react';
-import style from './SharedLayout.module.scss';
+import css from './SharedLayout.module.scss';
 import Loader from '../Loader/Loader';
 import { useSelector } from 'react-redux';
 import { selectTypeModal } from '../../redux/modal/selectors';
@@ -34,12 +34,15 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
   return (
     <div
       className={clsx(
-        location.pathname === '/login' && 'wrapperBG',
-        style.wrapper
+        document.body.classList.toggle(
+          'wrapperBG',
+          location.pathname === '/login'
+        ),
+        css.wrapper
       )}
     >
       <Header type={headerType} />
-      <main className={clsx(style.main, 'container')}>
+      <main className={clsx(css.main, 'container')}>
         <Suspense fallback={<Loader />}>{children}</Suspense>
         <ModalWindow>
           {type === modalTypes.addProduct && <AddProductForm />}

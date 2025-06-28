@@ -1,9 +1,4 @@
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { createColumnHelper } from '@tanstack/react-table';
 import css from './IncomeExpenses.module.scss';
 import { useSelector } from 'react-redux';
 import {
@@ -11,8 +6,8 @@ import {
   selectDasboardLoading,
 } from '../../redux/dashboard/selectors';
 import { IncomeExpense } from '../../redux/dashboard/slice';
-import Skeleton from 'react-loading-skeleton';
 import clsx from 'clsx';
+import Table from '../Table/Table';
 
 function IncomeExpenses() {
   const data = useSelector(selectDasboardData);
@@ -69,59 +64,14 @@ function IncomeExpenses() {
     }),
   ];
 
-  const table = useReactTable<IncomeExpense>({
-    data: data?.incomeExpenses || [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   return (
-    <div className={css.tableWrap}>
-      <h4 className={css.tableTitle}>Income/Expenses</h4>
-      <table>
-        <thead>
-          {table.getHeaderGroups().map(headerGroup => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map(header => (
-                <th key={header.id} className={css.tableTH}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {loading.dash
-            ? [...Array(5)].map((_, i) => (
-                <tr key={i}>
-                  {columns.map((_, j) => (
-                    <td key={j}>
-                      <Skeleton count={1} height={20} />
-                      <Skeleton count={1} height={20} />
-                    </td>
-                  ))}
-                </tr>
-              ))
-            : table.getRowModel().rows.map(row => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map(cell => (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-        </tbody>
-      </table>
-    </div>
+    <Table
+      title="Income/Expenses"
+      data={data?.incomeExpenses || []}
+      loading={loading.dash}
+      columns={columns}
+      noBorders={true}
+    />
   );
 }
 

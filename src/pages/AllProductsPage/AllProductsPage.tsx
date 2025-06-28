@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './AllProductsPage.module.scss';
 import { AppDispatch } from '../../redux/store';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Virtual } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
@@ -17,7 +17,6 @@ import { setSignOut } from '../../redux/auth/slice';
 import { selectFilters } from '../../redux/dashboard/selectors';
 import AddButton from '../../components/AddButton/AddButton';
 import { modalTypes } from '../../redux/modal/slice';
-import { navMargin } from '../../utils/navMargin';
 
 function AllProductsPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,7 +24,6 @@ function AllProductsPage() {
   const filters = useSelector(selectFilters);
   const totalPages: number = useSelector(selectProductTotalPages) || 1;
   const [firstLoad, setFirstLoad] = useState<boolean>(true);
-  const ref = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     dispatch(resetFilters());
@@ -40,18 +38,11 @@ function AllProductsPage() {
     }
   }, [dispatch, filters, firstLoad]);
 
-  useEffect(() => {
-    ref.current && navMargin(ref.current);
-  }, [ref.current]);
-
   return (
     <div className={css.productsWrap}>
       <Filters name="Product Name" />
       <AddButton type={modalTypes.addProduct} />
       <Swiper
-        onInit={() => {
-          if (ref.current) navMargin(ref.current);
-        }}
         onSlideChange={swiper => {
           const currentIndex = swiper.activeIndex + 1;
           if (page) {
@@ -80,7 +71,7 @@ function AllProductsPage() {
             virtualIndex={index}
             className={css.sliderSlide}
           >
-            <AllProducts ref={ref} />
+            <AllProducts />
           </SwiperSlide>
         ))}
       </Swiper>

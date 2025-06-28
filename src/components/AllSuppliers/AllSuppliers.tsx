@@ -1,15 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import css from './AllSuppliers.module.scss';
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import SimpleBarReact from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css';
+import { createColumnHelper } from '@tanstack/react-table';
 import { FiEdit2, FiTrash2 } from 'react-icons/fi';
 import { modalTypes, openModal } from '../../redux/modal/slice';
 import { AppDispatch } from '../../redux/store';
@@ -18,6 +9,7 @@ import {
   selectSuppliersLoading,
 } from '../../redux/suppliers/selectors';
 import { Supplier } from '../../redux/suppliers/slice';
+import Table from '../Table/Table';
 
 function AllSuppliers() {
   const data = useSelector(selectSuppliersData);
@@ -31,13 +23,7 @@ function AllSuppliers() {
         const row = info.row.original;
         return (
           <div className={css.tableUser}>
-            {loading.supplier ? (
-              <>
-                <Skeleton count={1} />
-              </>
-            ) : (
-              <span>{row.name}</span>
-            )}
+            <span>{row.name}</span>
           </div>
         );
       },
@@ -135,64 +121,13 @@ function AllSuppliers() {
     }),
   ];
 
-  const table = useReactTable<Supplier>({
-    data: data || [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-  });
-
   return (
-    <div className={css.tableWrap}>
-      <h4 className={css.tableTitle}>All suppliers</h4>
-      {data && data.length === 0 ? (
-        <p className="errorNothingFound">Nothing found</p>
-      ) : (
-        <SimpleBarReact style={{ maxWidth: 335 }} autoHide={false}>
-          <table>
-            <thead>
-              {table.getHeaderGroups().map(headerGroup => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <th key={header.id} className={css.tableTH}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {loading.supplier
-                ? [...Array(5)].map((_, i) => (
-                    <tr key={i}>
-                      {columns.map((_, j) => (
-                        <td key={j}>
-                          <Skeleton count={1} height={32} />
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                : table.getRowModel().rows.map(row => (
-                    <tr key={row.id}>
-                      {row.getVisibleCells().map(cell => (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-        </SimpleBarReact>
-      )}
-    </div>
+    <Table
+      title="All suppliers"
+      data={data || []}
+      loading={loading.supplier}
+      columns={columns}
+    />
   );
 }
 

@@ -1,29 +1,11 @@
 .ordersWrap {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   margin-top: 40px;
 }
 
 .sliderTables {
   width: 335px;
-  height: 78vh;
+  min-height: calc(100% - 55px);
 }
-
-// .sliderSlide {
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-:global(.swiper-pagination-bullet-active) {
-  width: 12px !important;
-  height: 12px !important;
-  background: $main-color !important;
-}
-:global(.swiper-pagination-bullet) {
-  width: 12px !important;
-  height: 12px !important;
-}
-// :global(.swiper-pagination-bullets) {
-//   bottom: 15% !important;
-// }

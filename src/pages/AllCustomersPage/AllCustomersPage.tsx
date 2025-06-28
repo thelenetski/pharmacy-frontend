@@ -15,7 +15,6 @@ import {
   selectCustomersTotalPages,
 } from '../../redux/customers/selectors';
 import AllCustomers from '../../components/AllCustomers/AllCustomers';
-import { navMargin } from '../../utils/navMargin';
 
 function AllCustomersPage() {
   const dispatch = useDispatch<AppDispatch>();
@@ -38,12 +37,8 @@ function AllCustomersPage() {
     }
   }, [dispatch, filters, firstLoad]);
 
-  useEffect(() => {
-    ref.current && navMargin(ref.current);
-  }, [ref.current]);
-
   return (
-    <div className={css.suppliersWrap}>
+    <div className={css.customersWrap}>
       <Filters name="User Name" />
       <Swiper
         onSlideChange={swiper => {
@@ -54,9 +49,6 @@ function AllCustomersPage() {
             } else if (currentIndex < page) {
               dispatch(getCustomers({ page: currentIndex, filters }));
             }
-          }
-          if (ref.current) {
-            navMargin(ref.current);
           }
         }}
         spaceBetween={20}
@@ -77,7 +69,7 @@ function AllCustomersPage() {
             virtualIndex={index}
             className={css.sliderSlide}
           >
-            <AllCustomers ref={ref} />
+            <AllCustomers />
           </SwiperSlide>
         ))}
       </Swiper>

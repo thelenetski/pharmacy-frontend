@@ -1,63 +1,18 @@
-.tableWrap {
-  margin-top: 20px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #1d1e211a;
-}
-.tableTitle {
-  padding: 14px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  vertical-align: middle;
-  background-color: $main-color4;
-}
-.tableWrap table {
-  width: 100%;
-  padding: 0 14px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  vertical-align: middle;
-  color: $main-dark-color;
-}
-.tableWrap .tableUser {
-  max-width: 84px;
+.tableUser {
   display: flex;
-  flex-direction: column;
   gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
 }
-.tableWrap th,
-.tableWrap td {
-  text-align: left;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  vertical-align: middle;
-  padding: 14px 0;
-  border-right: 1px solid #1d1e211a;
-  border-bottom: 1px solid #1d1e211a;
+.tableAvatar {
+  @include media('tablet') {
+    width: 36px;
+    height: 36px;
+  }
 }
-.tableWrap th {
-  color: #1d1e2166;
-}
-.tableWrap td {
-  color: $main-dark-color;
-}
-.tableWrap td:not(:last-child) {
-  padding-right: 8px;
-}
-.tableWrap th:not(:first-child),
-.tableWrap td:not(:first-child) {
-  padding-left: 10px;
-}
-.tableWrap th:last-child,
-.tableWrap td:last-child {
-  border-right: none;
-}
-.tableWrap tr:last-child td {
-  border-bottom: none;
-}
-.tableWrap .email {
-  word-break: break-all;
+.tableUser span {
+  @include media('tablet') {
+    word-break: break-word;
+    max-width: 70%;
+  }
 }

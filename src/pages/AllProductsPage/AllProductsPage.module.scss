@@ -9,37 +9,3 @@
   width: 335px;
   height: calc(100% - 115px);
 }
-
-:global(.swiper-pagination-bullet-active) {
-  width: 12px !important;
-  height: 12px !important;
-  background: $main-color !important;
-}
-:global(.swiper-pagination-bullet) {
-  width: 12px !important;
-  height: 12px !important;
-}
-// :global(.swiper-pagination-bullets) {
-//   bottom: 15% !important;
-// }
-
-.paginationWrap {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding-bottom: 20px;
-}
-
-.bullet {
-  width: 10px;
-  height: 10px;
-  background: $main-color4;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-
-  &.active {
-    background: $main-color;
-  }
-}

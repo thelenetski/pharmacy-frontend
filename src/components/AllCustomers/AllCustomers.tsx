@@ -1,23 +1,14 @@
 import { useSelector } from 'react-redux';
 import css from './AllCustomers.module.scss';
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import Skeleton from 'react-loading-skeleton';
-import 'react-loading-skeleton/dist/skeleton.css';
-import SimpleBarReact from 'simplebar-react';
-import 'simplebar-react/dist/simplebar.min.css';
+import { createColumnHelper } from '@tanstack/react-table';
 import {
   selectCustomersData,
   selectCustomersLoading,
 } from '../../redux/customers/selectors';
 import { Customer } from '../../redux/customers/slice';
-import { forwardRef } from 'react';
+import Table from '../Table/Table';
 
-const AllCustomers = forwardRef<HTMLDivElement, {}>((_, ref) => {
+const AllCustomers = () => {
   const data = useSelector(selectCustomersData);
   const loading = useSelector(selectCustomersLoading);
 
@@ -80,73 +71,14 @@ const AllCustomers = forwardRef<HTMLDivElement, {}>((_, ref) => {
     }),
   ];
 
-  const table = useReactTable<Customer>({
-    data: data || [],
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    columnResizeMode: 'onChange',
-  });
-
   return (
-    <div className={css.tableWrap} ref={ref}>
-      <h4 className={css.tableTitle}>Customers Data</h4>
-      {data && data.length === 0 ? (
-        <p className="errorNothingFound">Nothing found</p>
-      ) : (
-        <SimpleBarReact style={{ maxWidth: 335 }} autoHide={false}>
-          <table>
-            <thead>
-              {table.getHeaderGroups().map(headerGroup => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                    <th
-                      key={header.id}
-                      className={css.tableTH}
-                      style={{
-                        width: header.getSize(),
-                        maxWidth: header.column.columnDef.size,
-                      }}
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {loading.customer
-                ? [...Array(5)].map((_, i) => (
-                    <tr key={i}>
-                      {columns.map((_, j) => (
-                        <td key={j}>
-                          <Skeleton count={1} height={32} />
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                : table.getRowModel().rows.map(row => (
-                    <tr key={row.id}>
-                      {row.getVisibleCells().map(cell => (
-                        <td key={cell.id}>
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext()
-                          )}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-            </tbody>
-          </table>
-        </SimpleBarReact>
-      )}
-    </div>
+    <Table
+      title="Customers Data"
+      data={data || []}
+      loading={loading.customer}
+      columns={columns}
+    />
   );
-});
+};
 
 export default AllCustomers;
