@@ -29,8 +29,9 @@
 
   @include media('desktop') {
     padding-top: 0;
-    top: 80px;
-    border-right: 1px solid #1d1e211a;
+    top: 79px;
+    border-right: 1px solid rgba(29, 30, 33, 0.1019607843);
+    border-top: 1px solid rgba(29, 30, 33, 0.1019607843);
   }
 }
 
