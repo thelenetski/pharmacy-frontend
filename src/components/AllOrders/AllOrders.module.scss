@@ -1,3 +1,19 @@
+.tableUser {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  @include media('desktop') {
+    flex-wrap: nowrap;
+  }
+}
+.tableAvatar {
+  @include media('tablet') {
+    width: 36px;
+    height: 36px;
+  }
+}
 .completed,
 .confirmed,
 .pending,
@@ -10,6 +26,10 @@
   text-align: center;
   padding: 4px 0;
   border-radius: 40px;
+
+  @include media('tablet') {
+    width: 110px;
+  }
 }
 .completed {
   background-color: rgba($completed-txt-color, 0.1);

@@ -37,7 +37,11 @@ function IncomeExpenses() {
     }),
     columnHelper.accessor('name', {
       cell: info => {
-        return <div className={css.cellPadding}>{info.getValue()}</div>;
+        return (
+          <div className={clsx(css.cellPadding, css.middleTD)}>
+            {info.getValue()}
+          </div>
+        );
       },
       header: () => {
         return <span></span>;

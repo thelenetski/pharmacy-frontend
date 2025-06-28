@@ -10,4 +10,8 @@
   justify-content: center;
   width: 100%;
   height: calc(100% - 79px);
+
+  @include media('desktop') {
+    justify-content: flex-start;
+  }
 }

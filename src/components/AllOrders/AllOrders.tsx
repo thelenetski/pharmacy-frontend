@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import css from './AllOrders.module.scss';
 import { createColumnHelper } from '@tanstack/react-table';
-import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import {
   selectOrderData,
@@ -21,23 +20,16 @@ function AllOrders() {
         const row = info.row.original;
         return (
           <div className={css.tableUser}>
-            {loading.order ? (
-              <>
-                <Skeleton count={1} circle={true} width={24} height={24} />
-                <Skeleton count={1} />
-              </>
-            ) : (
-              <>
-                <img
-                  src={row.photo}
-                  alt={row.name}
-                  className={css.tableAvatar}
-                  width={24}
-                  height={24}
-                />
-                <span>{row.name}</span>
-              </>
-            )}
+            <>
+              <img
+                src={row.photo}
+                alt={row.name}
+                className={css.tableAvatar}
+                width={24}
+                height={24}
+              />
+              <span>{row.name}</span>
+            </>
           </div>
         );
       },

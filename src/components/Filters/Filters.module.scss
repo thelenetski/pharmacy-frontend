@@ -1,6 +1,9 @@
 .searchWrap {
   display: flex;
   gap: 8px;
+  @include media('tablet') {
+    width: 354px;
+  }
 }
 .searchWrap input {
   width: 215px;

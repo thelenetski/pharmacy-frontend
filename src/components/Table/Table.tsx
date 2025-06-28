@@ -41,7 +41,7 @@ function Table<T extends object>({
         <p className="errorNothingFound">Nothing found</p>
       ) : (
         <SimpleBarReact
-          className={scroll && css.scrollPosition}
+          className={clsx(scroll && css.scrollPosition)}
           autoHide={false}
         >
           <table>

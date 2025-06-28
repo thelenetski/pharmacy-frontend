@@ -42,6 +42,10 @@
   line-height: 14px;
   vertical-align: middle;
   color: $main-dark-color;
+
+  @include media('desktop') {
+    min-width: 100%;
+  }
 }
 .tableWrap .tableUser {
   width: 114px;
@@ -62,6 +66,10 @@
 
   @include media('tablet') {
     font-size: 14px;
+  }
+  @include media('desktop') {
+    font-size: 16px;
+    line-height: 18px;
   }
 }
 .tableNoRightBorder table {

@@ -1,62 +1,7 @@
-.tableWrap {
-  margin-top: 20px;
-  margin-bottom: 40px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #1d1e211a;
-}
-.tableTitle {
-  padding: 14px;
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
-  vertical-align: middle;
-  background-color: $main-color4;
-}
-.tableWrap table {
-  width: 100%;
-  padding: 0 14px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  vertical-align: middle;
-  color: $main-dark-color;
-}
-.tableWrap .tableUser {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.tableWrap th,
-.tableWrap td {
-  text-align: left;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-  vertical-align: middle;
-  padding: 14px 0;
-  border-bottom: 1px solid #1d1e211a;
-}
-.tableWrap th {
-  color: #1d1e2166;
-}
-.tableWrap td {
-  font-size: 14px;
-  color: $main-dark-color;
-}
-.tableWrap td:not(:last-child) {
-  padding-right: 8px;
-}
-.tableWrap td:first-child {
-  font-size: 12px;
-  vertical-align: baseline;
-}
-.tableWrap th:not(:first-child),
-.tableWrap td:not(:first-child) {
-  padding-left: 10px;
-}
-.tableWrap tr:last-child td {
-  border-bottom: none;
+.middleTD {
+  @include media('tablet') {
+    width: 370px;
+  }
 }
 .expense,
 .income,
@@ -81,12 +26,15 @@
   color: $main-dark-color;
 }
 .greenAmount {
+  text-align: right;
   color: $completed-txt-color;
 }
 .redAmount {
+  text-align: right;
   color: $cancelled-txt-color;
 }
 .strokeAmount {
+  text-align: right;
   color: $main-dark-color;
   text-decoration: line-through;
 }

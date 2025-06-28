@@ -22,6 +22,9 @@
   @include media('tablet') {
     width: calc(32% - 4px);
   }
+  @include media('desktop') {
+    width: 240px;
+  }
 }
 .statBox:hover {
   border: 1px solid $main-color;

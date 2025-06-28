@@ -23,8 +23,14 @@ function DashboardPage() {
   return (
     <div className={css.dashWrap}>
       <Statistics />
-      <RecentCustomers />
-      <IncomeExpenses />
+      <div className={css.dashTablesBox}>
+        <div className={css.dashTableItem}>
+          <RecentCustomers />
+        </div>
+        <div className={css.dashTableItem}>
+          <IncomeExpenses />
+        </div>
+      </div>
     </div>
   );
 }

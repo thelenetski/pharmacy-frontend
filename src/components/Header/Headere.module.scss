@@ -2,6 +2,14 @@
   border-bottom: 1px solid #1d1e211a;
 }
 
+.headerBox {
+  @include media('desktop') {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .logoWrap {
   height: 79px;
   display: flex;
