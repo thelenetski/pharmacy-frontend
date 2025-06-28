@@ -6,6 +6,7 @@
 
   @include media('tablet') {
     min-width: 200px;
+    padding: 1px 0;
   }
 }
 .tableAvatar {

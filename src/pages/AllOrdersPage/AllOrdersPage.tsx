@@ -60,6 +60,7 @@ function AllOrdersPage() {
         modules={[Pagination, Virtual]}
         className={css.sliderTables}
         virtual
+        speed={0}
       >
         {Array.from({ length: totalPages }).map((_, index) => (
           <SwiperSlide
