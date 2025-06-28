@@ -22,6 +22,10 @@
   color: #fff;
   border-radius: 60px;
 
+  @include media('tablet') {
+    font-size: 14px;
+  }
+
   &:disabled {
     background: #cccccc;
     color: #666666;
