@@ -23,6 +23,9 @@ function Filters({ name = 'User Name' }) {
       setSearchResult(data.keyword);
       setLoad(true);
       dispatch(setFilters(data.keyword));
+      if (document.activeElement instanceof HTMLElement) {
+        document.activeElement.blur();
+      }
     }
   };
 

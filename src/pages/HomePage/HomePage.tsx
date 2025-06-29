@@ -6,8 +6,6 @@ import { Navigate } from 'react-router-dom';
 const HomePage = () => {
   const isSignIn = useSelector(selectIsSignedIn);
 
-  console.log('Home ...');
-
   return (
     <div className={css.homePage}>
       {isSignIn ? <Navigate to={'/dashboard'} /> : <Navigate to={'/login'} />}
