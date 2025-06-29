@@ -42,7 +42,13 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
       )}
     >
       <Header type={headerType} />
-      <main className={clsx(css.main, 'container')}>
+      <main
+        className={clsx(
+          css.main,
+          'container',
+          location.pathname === '/login' && css.mainMiddleContent
+        )}
+      >
         <Suspense fallback={<Loader />}>{children}</Suspense>
         <ModalWindow>
           {type === modalTypes.addProduct && <AddProductForm />}
