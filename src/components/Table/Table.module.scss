@@ -4,7 +4,7 @@
   border-radius: 8px;
   border: 1px solid #1d1e211a;
   margin-bottom: 50px;
-  overflow: hidden;
+  background: $main-color8;
 }
 :global(.simplebar-track.simplebar-horizontal) {
   background: #f1f1f1;
@@ -44,7 +44,6 @@
   line-height: 14px;
   vertical-align: middle;
   color: $main-dark-color;
-  background: $main-color8;
 
   @include media('desktop') {
     min-width: 100%;
