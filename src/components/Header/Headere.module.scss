@@ -1,7 +1,6 @@
-.headerWrap {
-  border-bottom: 1px solid #1d1e211a;
-}
-
+// .headerWrap {
+//   border-bottom: 1px solid #1d1e211a;
+// }
 .headerBox {
   @include media('desktop') {
     display: flex;
@@ -11,7 +10,7 @@
 }
 
 .logoWrap {
-  height: 79px;
+  height: 80px;
   display: flex;
   gap: 14px;
   align-items: center;

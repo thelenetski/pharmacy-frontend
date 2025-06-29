@@ -1,24 +1,25 @@
 .suppliersWrap {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 40px;
-}
 
+  @include media('tablet') {
+    margin-top: 50px;
+  }
+
+  @include media('desktop') {
+    margin-top: 75px;
+  }
+}
+.pageActions {
+  @include media('tablet') {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .sliderTables {
-  width: 335px;
-  height: calc(100% - 120px);
+  width: 100%;
+  height: 100%;
 }
-
-:global(.swiper-pagination-bullet-active) {
-  width: 12px !important;
-  height: 12px !important;
-  background: $main-color !important;
-}
-:global(.swiper-pagination-bullet) {
-  width: 12px !important;
-  height: 12px !important;
-}
-// :global(.swiper-pagination-bullets) {
-//   bottom: 15% !important;
-// }

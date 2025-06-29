@@ -69,16 +69,12 @@
 
 @media screen and (min-width: 768px) {
   .modalWrapper {
-    padding: 48px 64px;
-    width: fit-content;
+    padding: 40px;
+    width: 536px;
     max-width: 628px;
   }
-  .btnClose {
-    top: 20px;
-    right: 20px;
-  }
   .btnClose svg {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
   }
 }

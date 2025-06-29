@@ -1,10 +1,6 @@
 .logo {
   width: 44px;
   height: 44px;
-  @include media('desktop') {
-    position: absolute;
-    left: 20px;
-  }
 }
 .imgWidthFull {
   width: 32px;
@@ -13,5 +9,11 @@
   @include media('tablet') {
     width: 40px;
     height: 40px;
+  }
+}
+.imgPosition {
+  @include media('desktop') {
+    position: absolute;
+    left: 20px;
   }
 }

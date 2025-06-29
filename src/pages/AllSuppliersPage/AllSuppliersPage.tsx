@@ -40,8 +40,10 @@ function AllSuppliersPage() {
 
   return (
     <div className={css.suppliersWrap}>
-      <Filters name="Supplier Name" />
-      <AddButton name="Add a new supplier" type={modalTypes.addSupplier} />
+      <div className={css.pageActions}>
+        <Filters name="Supplier Name" />
+        <AddButton name="Add a new supplier" type={modalTypes.addSupplier} />
+      </div>
       <Swiper
         onSlideChange={swiper => {
           const currentIndex = swiper.activeIndex + 1;

@@ -6,11 +6,14 @@ import { selectContentModal } from '../../redux/modal/selectors';
 import { deleteSupplier } from '../../redux/suppliers/operations';
 import { deleteProduct } from '../../redux/products/operations';
 import { selectIsAnyLoading } from '../../redux/selectIsAnyLoading';
+import { useForm } from 'react-hook-form';
+import ModalActionControls from '../ModalActionControls/ModalActionControls';
 
 function ModalConfirm() {
   const dispatch = useDispatch<AppDispatch>();
   const content = useSelector(selectContentModal);
   const loading = useSelector(selectIsAnyLoading);
+  const { handleSubmit } = useForm({});
 
   const handleConfirm = () => {
     if (!content) return;
@@ -32,25 +35,9 @@ function ModalConfirm() {
   return (
     <div className={css.addProductWrap}>
       <h4 className={css.formTitle}>Are you sure?</h4>
-      <>
-        <div className={css.controls}>
-          <button
-            type="button"
-            className={css.addBtn}
-            onClick={handleConfirm}
-            disabled={loading}
-          >
-            {loading ? 'Loading...' : 'Confirm'}
-          </button>
-          <button
-            type="button"
-            className={css.closeBtn}
-            onClick={() => dispatch(closeModal())}
-          >
-            Cancel
-          </button>
-        </div>
-      </>
+      <form onSubmit={handleSubmit(handleConfirm)}>
+        <ModalActionControls loading={loading} name={'Confirm'} />
+      </form>
     </div>
   );
 }

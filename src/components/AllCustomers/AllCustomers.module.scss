@@ -2,3 +2,22 @@
   display: flex;
   gap: 8px;
 }
+.tableUser {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+
+  @include media('tablet') {
+    min-width: max-content;
+  }
+  @include media('desktop') {
+    flex-wrap: nowrap;
+  }
+}
+.tableAvatar {
+  @include media('tablet') {
+    width: 36px;
+    height: 36px;
+  }
+}

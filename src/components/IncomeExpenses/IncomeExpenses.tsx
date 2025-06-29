@@ -69,13 +69,16 @@ function IncomeExpenses() {
   ];
 
   return (
-    <Table
-      title="Income/Expenses"
-      data={data?.incomeExpenses || []}
-      loading={loading.dash}
-      columns={columns}
-      noBorders={true}
-    />
+    <div className={css.tableWrap}>
+      <Table
+        title="Income/Expenses"
+        data={data?.incomeExpenses || []}
+        loading={loading.dash}
+        columns={columns}
+        noBorders={true}
+        skeletonRows={6}
+      />
+    </div>
   );
 }
 

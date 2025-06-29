@@ -40,8 +40,10 @@ function AllProductsPage() {
 
   return (
     <div className={css.productsWrap}>
-      <Filters name="Product Name" />
-      <AddButton type={modalTypes.addProduct} />
+      <div className={css.pageActions}>
+        <Filters name="Product Name" />
+        <AddButton type={modalTypes.addProduct} />
+      </div>
       <Swiper
         onSlideChange={swiper => {
           const currentIndex = swiper.activeIndex + 1;

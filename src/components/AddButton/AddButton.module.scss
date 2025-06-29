@@ -8,6 +8,10 @@
   font-size: 14px;
   line-height: 18px;
   transition: 0.3s ease-in-out;
+
+  @include media('tablet') {
+    margin-top: 0;
+  }
 }
 .buttonWrap:hover {
   cursor: pointer;

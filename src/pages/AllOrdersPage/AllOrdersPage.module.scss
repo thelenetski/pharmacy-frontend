@@ -5,6 +5,10 @@
   flex-direction: column;
   margin-top: 40px;
 
+  @include media('tablet') {
+    margin-top: 50px;
+  }
+
   @include media('desktop') {
     margin-top: 75px;
   }
@@ -12,7 +16,7 @@
 
 .sliderTables {
   width: 335px;
-  min-height: calc(100% - 55px);
+  height: 100%;
 
   @include media('tablet') {
     width: 100%;

@@ -10,6 +10,7 @@
   position: fixed;
   pointer-events: auto;
   border-radius: 10px;
+  bottom: 8px;
 }
 :global(.simplebar-scrollbar:before) {
   background: #e6e6e6 !important;
@@ -66,6 +67,7 @@
 
   @include media('tablet') {
     font-size: 14px;
+    line-height: 16px;
   }
   @include media('desktop') {
     font-size: 16px;
@@ -88,7 +90,7 @@
   color: #1d1e2166;
 }
 .tableWrap td {
-  height: 46px;
+  height: 74px;
   color: $main-dark-color;
 }
 .tableWrap td:not(:last-child) {

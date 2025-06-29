@@ -1,11 +1,25 @@
 .productsWrap {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 40px;
-  height: 100%;
-}
 
+  @include media('tablet') {
+    margin-top: 50px;
+  }
+
+  @include media('desktop') {
+    margin-top: 75px;
+  }
+}
+.pageActions {
+  @include media('tablet') {
+    display: flex;
+    justify-content: space-between;
+  }
+}
 .sliderTables {
-  width: 335px;
-  height: calc(100% - 115px);
+  width: 100%;
+  height: 100%;
 }

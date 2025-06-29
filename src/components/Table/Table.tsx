@@ -5,6 +5,7 @@ import {
   ColumnDef,
 } from '@tanstack/react-table';
 import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import SimpleBarReact from 'simplebar-react';
 import css from './Table.module.scss';
 import clsx from 'clsx';

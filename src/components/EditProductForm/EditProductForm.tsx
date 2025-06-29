@@ -17,6 +17,7 @@ import { AppDispatch } from '../../redux/store';
 import { selectContentModal } from '../../redux/modal/selectors';
 import FormList from '../FormList/FormList';
 import { selectFilters } from '../../redux/dashboard/selectors';
+import ModalActionControls from '../ModalActionControls/ModalActionControls';
 
 export interface Data {
   name: string;
@@ -90,7 +91,7 @@ function EditProductForm() {
 
   return (
     <div className={css.addProductWrap}>
-      <h4 className={css.formTitle}>Edit data</h4>
+      <h4 className={css.formTitle}>Edit product</h4>
       <>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={css.formWrap}>
@@ -142,19 +143,7 @@ function EditProductForm() {
               )}
             </label>
           </div>
-
-          <div className={css.controls}>
-            <button type="submit" className={css.addBtn} disabled={loading.add}>
-              {loading.add ? 'Loading...' : 'Save'}
-            </button>
-            <button
-              type="button"
-              className={css.closeBtn}
-              onClick={() => dispatch(closeModal())}
-            >
-              Cancel
-            </button>
-          </div>
+          <ModalActionControls loading={loading.add} name={'Save'} />
         </form>
       </>
     </div>
