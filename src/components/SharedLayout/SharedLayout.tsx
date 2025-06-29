@@ -29,6 +29,11 @@ const SharedLayout: React.FC<SharedLayoutProps> = ({ children }) => {
     } else {
       setHeaderType('full');
     }
+    document.body.classList.add('bodyHeaderLine');
+
+    return () => {
+      document.body.classList.remove('bodyHeaderLine');
+    };
   }, [location]);
 
   return (
