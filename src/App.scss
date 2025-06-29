@@ -89,4 +89,8 @@ input:focus {
 }
 .swiper-pagination-bullets {
   bottom: 25px !important;
+
+  @include media('desktop') {
+    bottom: 100px !important;
+  }
 }
