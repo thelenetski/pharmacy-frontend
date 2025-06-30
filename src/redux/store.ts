@@ -22,7 +22,7 @@ import { customersReducer } from './customers/slice';
 const authPersistConfig = {
   key: 'auth',
   storage,
-  whitelist: ['token', 'isSignedIn'],
+  whitelist: ['token'],
 };
 
 export const store = configureStore({
