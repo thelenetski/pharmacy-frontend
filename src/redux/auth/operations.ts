@@ -99,6 +99,12 @@ export const refreshUser = createAsyncThunk<
         {},
         { withCredentials: true }
       );
+
+      const newToken = res.data.data.accessToken;
+      if (newToken) {
+        setAuthHeader(newToken);
+      }
+
       return res.data;
     } catch (err) {
       const error = err as AxiosError<AuthError>;
